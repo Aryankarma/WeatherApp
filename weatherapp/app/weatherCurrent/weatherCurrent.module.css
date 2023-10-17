@@ -29,24 +29,29 @@
     height: 67.328px;
     position: relative;
     background-color: #151515;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    border-radius: 1px;
 }
 .svgContainer{
     display: flex;
     position: absolute;
     justify-content: center;
-    bottom: 0;
+    /* padding: 1.5rem; */
 }
 .svgContainer svg{
     position: absolute;
-    width: 298px;
+    width: 270px;
 }
 .svgContainer svg path{
-    stroke-width: 4px;
+    stroke-width: 1px;
     stroke: white;
 }
 .img{
     width: 300px;
     height: auto;
+    /* outline: 1px solid red; */
 }
 .box{
     height: 25px;
@@ -54,6 +59,10 @@
     background-color: red;
     border-radius: 100%;
     position: absolute;
-    left: 0;
-
+    left: 1.5%;
+    bottom: 0;  
+    background:  radial-gradient(50% 50% at 50% 50%, #F00 30.73%, #E98E05 100%);
+    /* fill:; */
+    /* filter: drop-shadow(); */
+    box-shadow: 0px 0px 27px rgba(255, 170, 80, 0.50);
 }
