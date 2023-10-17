@@ -1,0 +1,59 @@
+.homeContainer{
+    background-color: #111;
+}
+.aqiRange{
+    accent-color: black;
+    -webkit-appearance: none;
+    margin-right: 15px;
+    margin-top: 3rem;
+    width: 400px;
+    height: 5px;
+    border-radius: 5px;
+    background-image: linear-gradient(90deg, #B3AEF5 0%, rgba(238, 85, 153, 0.62) 30.73%, #FF7878 57.29%, #FF3200 74.48%, #FA9D5A 100%);
+    position: relative;
+}
+
+.aqiRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    cursor: grab;
+    border-radius: 50%;
+    background: #111;
+    border: 3px solid #E1E1E1;
+    box-shadow: 0 0 25px 5px #111;
+    width: 12px;
+    height: 12px;
+}
+.mainSvgContainer{
+    display: flex;
+    width: 300px;
+    height: 67.328px;
+    position: relative;
+    background-color: #151515;
+}
+.svgContainer{
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    bottom: 0;
+}
+.svgContainer svg{
+    position: absolute;
+    width: 298px;
+}
+.svgContainer svg path{
+    stroke-width: 4px;
+    stroke: white;
+}
+.img{
+    width: 300px;
+    height: auto;
+}
+.box{
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 100%;
+    position: absolute;
+    left: 0;
+
+}
