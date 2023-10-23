@@ -1,5 +1,6 @@
 .homeContainer{
-    background-color: #111;
+    /* background-color: #101010; */
+    background-color: #000;
 }
 .aqiRange{
     accent-color: black;
@@ -23,46 +24,69 @@
     width: 12px;
     height: 12px;
 }
-.mainSvgContainer{
-    display: flex;
-    width: 300px;
-    height: 67.328px;
-    position: relative;
-    background-color: #151515;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem;
-    border-radius: 1px;
+
+
+/* css for new sunrise animation */
+.blackShade,#circlePath,.sunContainer{
+    margin-top: 2rem;
 }
-.svgContainer{
-    display: flex;
+.blackShade{
     position: absolute;
-    justify-content: center;
-    /* padding: 1.5rem; */
+    height: 140px;
+    width: 400px;
+    top: 34%;
+    /* background: linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #151515 43.23%); */
+    background: linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #222 43.23%);
+    z-index: 2; 
 }
-.svgContainer svg{
-    position: absolute;
-    width: 270px;
-}
-.svgContainer svg path{
-    stroke-width: 1px;
-    stroke: white;
-}
-.img{
-    width: 300px;
-    height: auto;
-    /* outline: 1px solid red; */
-}
-.box{
-    height: 25px;
-    width: 25px;
-    background-color: red;
+#circlePath{
+    outline: 2px solid transparent;
+    color: white;
+    width: 400px;
+    height: 400px;
     border-radius: 100%;
     position: absolute;
-    left: 1.5%;
-    bottom: 0;  
-    background:  radial-gradient(50% 50% at 50% 50%, #F00 30.73%, #E98E05 100%);
-    /* fill:; */
-    /* filter: drop-shadow(); */
-    box-shadow: 0px 0px 27px rgba(255, 170, 80, 0.50);
+    top: 33%;
+    /* animation: spin 5s ease-in-out infinite; */
+    z-index: 3;
+}
+
+.img{
+    width: 400px;
+    /* width: 35vw; */
+    height: 70px;
+    z-index: 1;
+    /* box-sizing: border-box; */
+}
+.sunContainer{      
+    display: flex;
+    height: 180px;
+    padding: 1rem;
+    /* background-color: #151515; */
+    background-color: #222;
+    border-radius: 25px;
+    z-index: 0;
+    /* overflow hiden rectangle */
+    /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); */
+}
+.item {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    background: #f00;
+    top: 11.75%;
+    /* top: 45px; */
+    left: 9.5%;
+    /* left: 40px; */
+    background: radial-gradient(50% 50% at 50% 50%, #F00 30.73%, #E98E05 100%);
+    box-shadow: 0px 0px 27px #FFAA50;
+    /* animation: spin 5s ease-in-out infinite reverse; */
+}
+@keyframes spin {
+   100%{    
+        /* transform: rotate(95deg); */
+        rotate: 90deg;
+    }
 }
