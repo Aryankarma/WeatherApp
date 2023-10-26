@@ -25,16 +25,15 @@
     height: 12px;
 }
 
-
 /* css for new sunrise animation */
 .blackShade,#circlePath,.sunContainer{
     margin-top: 2rem;
 }
 .blackShade{
     position: absolute;
-    height: 140px;
+    height: 130px;
     width: 400px;
-    top: 34%;
+    bottom: 5%;
     /* background: linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #151515 43.23%); */
     background: linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #222 43.23%);
     z-index: 2; 
@@ -46,7 +45,7 @@
     height: 400px;
     border-radius: 100%;
     position: absolute;
-    top: 33%;
+    top: -8%;
     /* animation: spin 5s ease-in-out infinite; */
     z-index: 3;
 }
@@ -58,14 +57,16 @@
     z-index: 1;
     /* box-sizing: border-box; */
 }
+
 .sunContainer{      
     display: flex;
-    height: 180px;
+    height: 160px;
     padding: 1rem;
     /* background-color: #151515; */
     background-color: #222;
     border-radius: 25px;
     z-index: 0;
+    position: relative;
     /* overflow hiden rectangle */
     /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); */
 }
@@ -84,9 +85,63 @@
     box-shadow: 0px 0px 27px #FFAA50;
     /* animation: spin 5s ease-in-out infinite reverse; */
 }
+
 @keyframes spin {
    100%{    
         /* transform: rotate(95deg); */
         rotate: 90deg;
     }
+}
+.timings{
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    font-size: 12px;
+    font-weight: 200;
+}
+#riseTime,#setTime{
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2%;
+}
+.svg{
+    height: 25px;
+}
+.upper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.sunset, .sunrise{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mainWeather{
+    background-image: url("../../public/images/bgMain.png");
+    /* filter: blur(.5px); */
+    width: 550px;
+    background-repeat: no-repeat;
+    height: 450px;
+    margin: 2rem;
+    position: relative;
+}
+#tempCondition{
+    position: absolute;
+    top: 22.5%;
+    left: 5%;
+    line-height: 3rem;
+    width: fit-content;
+}
+.temp{
+    font-weight: 700;
+    color: #36A6F6;
+    font-size: 200px;
+    text-shadow: 21px 0px 96px rgba(0, 0, 0, 0.76);;
+}
+#condition{
+    font-size: 32px;
 }

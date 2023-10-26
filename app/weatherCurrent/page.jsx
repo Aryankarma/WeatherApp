@@ -145,16 +145,35 @@ export default function Home() {
         </div>
 
         <img className={styles.img} src="images/Ellipsefinal.png" alt="sunLine" />
+        
         <div className={styles.blackShade}>
-
-          <div className="timings sunrise"></div>
-          <div className="timings sunset"></div>
-
+          <div className={styles.timings}>
+            <div className={styles.sunset}>
+              <div className={styles.upper}>
+                <img className={styles.svg} src="images/svgs/sunrise-2.svg" alt="" />
+                <p>Sunrise</p>
+              </div>
+                <hr style={{border:0}} />
+                <p id={styles.riseTime}>5:00am</p>
+            </div>
+            <div className={styles.sunset}>
+            <div className={styles.upper}>
+                <img className={styles.svg} src="images/svgs/sunset-2.svg" alt="" />
+                <p>Sunset</p>
+            </div>
+                <hr style={{border:0}}/>
+                <p id={styles.setTime}>9:12pm</p>
+            </div>
+          </div>
         </div>
-
       </div>
 
-
+      <div className={styles.mainWeather}>
+        <div id={styles.tempCondition}>
+          <span className={styles.temp}>24</span><br />
+          <span id={styles.condition}>Cloudy, 22°/29°</span>
+        </div>  
+      </div>
     </div>
   );
 }
