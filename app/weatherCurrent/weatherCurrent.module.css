@@ -192,3 +192,8 @@
     right:0;
     transform: translate(30%,-25%);
 }
+.weatherDetailContainer{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 40px; /*edit*/ 
+}

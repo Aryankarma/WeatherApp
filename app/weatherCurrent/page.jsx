@@ -185,9 +185,21 @@ export default function Home() {
   
     </div>
 
-    <div className={styles.rightContainer}>
-      <WeatherDetails/>
-    </div>
+      <div className={styles.rightContainer}>
+        <div className={styles.weatherDetailContainer}>
+          <WeatherDetails />
+          {/* <WeatherDetails />
+          <WeatherDetails />
+          <WeatherDetails />
+          <WeatherDetails />
+          <WeatherDetails /> */}
+        </div>
+
+        <div className={styles.weatherGraph}>
+          
+        </div>
+
+      </div>
 
   </div>
 

@@ -3,7 +3,10 @@
     width: 200px;
     border-radius: 25px;
     background: #151515;
-    padding: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .detailName{
     display: flex;
@@ -13,6 +16,9 @@
     font-size: 20px;
     font-weight: 300;
 }
-#thermometerSvg{
-    width: fit-content;
+.value{
+    color: #E1E1E1;
+    font-size: 45px;
+    font-weight: 600;
+    transform: translateY(15%);
 }
