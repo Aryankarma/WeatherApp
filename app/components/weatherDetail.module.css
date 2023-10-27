@@ -1,0 +1,18 @@
+.detailBox{
+    height: 140px;
+    width: 200px;
+    border-radius: 25px;
+    background: #151515;
+    padding: 1rem;
+}
+.detailName{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    color: #6F6F6F;
+    font-size: 20px;
+    font-weight: 300;
+}
+#thermometerSvg{
+    width: fit-content;
+}

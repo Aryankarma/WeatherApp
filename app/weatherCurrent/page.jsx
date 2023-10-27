@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import styles from "./weatherCurrent.module.css";
 import anime from "animejs/lib/anime.es.js";
+import WeatherDetails from "../components/weatherDetailSection";
 
 export default function Home() {
   const api = "24951e153ffc4135aeb175518231307";
@@ -102,18 +103,12 @@ export default function Home() {
     })
 
   })
-  
-  // window.onload = function(){
-  //   console.log("after loading")
-  //   const element = document.querySelector('#weatherCurrent_circlePath__WfQJv');
-  //   // thisis printing the rotate value at 0% but we need to modify the rotation value at 100%
-  //   element.style.rotate = "0deg" ;
-  //   console.log(element.style.rotate)
-  // }
 
   return (
-    <div className="homeContainer p-10 text-center justify-center items-center flex flex-col ...">
-      <h1 className="p-5 text-3xl font-extrabold">Weather Forecast</h1>
+    <div className={styles.homeContainer}>
+      <div className={styles.leftContent}>
+
+      {/* <h1 className="p-5 text-3xl font-extrabold">Weather Forecast</h1> */}
 
       <form action="" onSubmit={(e) => formSubmit(e)}>
         <input
@@ -122,7 +117,7 @@ export default function Home() {
           type="text"
           placeholder="enter your city"
           name="city"
-        />
+          />
         <button className="btn p-5" type="submit">
           Search
         </button>
@@ -136,7 +131,7 @@ export default function Home() {
         type="range"
         name="aqi"
         id="aqiRange"
-      />
+        />
 
       <div className={styles.sunContainer}>
 
@@ -169,11 +164,33 @@ export default function Home() {
       </div>
 
       <div className={styles.mainWeather}>
+
+        {/* <div className={styles.conditionImgCont}> */}
+          <img className={styles.conditionImg} src="images/weatherCondition/cloudStrike.png" alt="" />          
+        {/* </div> */}
+
         <div id={styles.tempCondition}>
-          <span className={styles.temp}>24</span><br />
+          <span className={styles.temp}>24<sup id={styles.degreeUnit}>°C</sup></span>
+          <br/>
+          {/* <span id={styles.degreeUnit}>°C</span> */}
           <span id={styles.condition}>Cloudy, 22°/29°</span>
         </div>  
+      
+        <div id={styles.location1}>
+          <img className={styles.svgLocation} src="images/svgs/locationLogo.svg" alt="" />
+          <h1>Indore, India</h1>
+        </div>
+  
       </div>
+  
     </div>
-  );
+
+    <div className={styles.rightContainer}>
+      <WeatherDetails/>
+    </div>
+
+  </div>
+
+
+);
 }

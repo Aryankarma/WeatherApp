@@ -1,6 +1,24 @@
 .homeContainer{
-    /* background-color: #101010; */
-    background-color: #000;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;   
+    gap: 4rem;
+}
+.leftContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.rightContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    height: 90vh;
+    background-color: #333;
+    border-radius: 2rem;
 }
 .aqiRange{
     accent-color: black;
@@ -61,6 +79,7 @@
 .sunContainer{      
     display: flex;
     height: 160px;
+    width: fit-content;
     padding: 1rem;
     /* background-color: #151515; */
     background-color: #222;
@@ -144,4 +163,32 @@
 }
 #condition{
     font-size: 32px;
+}
+.svgLocation{
+    height: 50px;
+    color: #ffffff;
+}
+#location1{
+    line-height: 3rem;
+    width: fit-content;
+    bottom:0;
+    font-size: 32px;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+}
+#degreeUnit{
+    font-weight: 400;
+    top: -7rem;
+    left: -1rem;
+    color: white;
+    font-size: 32px;
+}
+.conditionImg{
+    position:absolute;
+    top:0;
+    right:0;
+    transform: translate(30%,-25%);
 }

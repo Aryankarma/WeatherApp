@@ -16,7 +16,12 @@
   }
 }
 
-body{
-  background-color: #111111;
+body{  
+  height: 100vh;
+  background-color: #111111 !important;
+  /* padding: 3rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* overflow: hidden; */
 }
