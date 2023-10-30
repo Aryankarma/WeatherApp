@@ -4,8 +4,13 @@ import { useState, useEffect } from "react";
 import styles from "./weatherCurrent.module.css";
 import anime from "animejs/lib/anime.es.js";
 import WeatherDetails from "../components/weatherDetailSection";
+import DoubleWeatherGraph from "../components/doubleWeatherGraph";
+import SingleWeatherGraph from "../components/singleWeatherGraph";
 
+
+// function Home() {
 export default function Home() {
+
   const api = "24951e153ffc4135aeb175518231307";
 
   const formSubmit = (e) => {
@@ -196,13 +201,10 @@ export default function Home() {
         </div>
 
         <div className={styles.weatherGraph}>
-          
+          <DoubleWeatherGraph supressHydrationWarning={true}/>
+          <SingleWeatherGraph supressHydrationWarning={true}/>
         </div>
-
       </div>
-
   </div>
-
-
 );
 }

@@ -10,4 +10,4 @@ export default function WeatherDetails(){
             <h1>31°<sub>{}</sub></h1>
         </div>
     </div>
-}   
+}
