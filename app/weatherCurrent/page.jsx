@@ -4,8 +4,18 @@ import { useState, useEffect } from "react";
 import styles from "./weatherCurrent.module.css";
 import anime from "animejs/lib/anime.es.js";
 import WeatherDetails from "../components/weatherDetailSection";
-import DoubleWeatherGraph from "../components/doubleWeatherGraph";
-import SingleWeatherGraph from "../components/singleWeatherGraph";
+import dynamic from 'next/dynamic';
+import XAxis1 from "../components/xaxis";
+
+const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
+  ssr: false,
+})
+const SingleWeatherGraph = dynamic(() => import('../components/singleWeatherGraph'), {
+  ssr: false,
+})
+
+const days=["Mon", "Tue","Wed","Thu","Fri","Sat","Sun"]
+const time = ["12pm","1am","2am","3am","4am","5am","6am","7am","8am","9am","10am","11am","12am"] 
 
 
 // function Home() {
@@ -77,7 +87,7 @@ export default function Home() {
     // // newSelect.style.transform = 'rotate(${60}deg)'
 
     const element = document.querySelector('#weatherCurrent_circlePath__WfQJv');
-    console.log(element.style)
+    // console.log(element.style)
     // const animationName = getComputedStyle(element).getPropertyValue('animation-name');
     // const animationName2 = getComputedStyle(element).getPropertyValue("transform")
     // matrix(0.983272, 0.182145, -0.182145, 0.983272, 0, 0)
@@ -201,8 +211,10 @@ export default function Home() {
         </div>
 
         <div className={styles.weatherGraph}>
-          <DoubleWeatherGraph supressHydrationWarning={true}/>
-          <SingleWeatherGraph supressHydrationWarning={true}/>
+          <DoubleWeatherGraph />
+          <XAxis1 data={days}/>
+          <SingleWeatherGraph />
+          <XAxis1 data={time}/>
         </div>
       </div>
   </div>
