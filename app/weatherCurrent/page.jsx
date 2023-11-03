@@ -203,17 +203,17 @@ export default function Home() {
       <div className={styles.rightContainer}>
         <div className={styles.weatherDetailContainer}>
           <WeatherDetails />
-          {/* <WeatherDetails />
+          <WeatherDetails />
+          <WeatherDetails /> 
           <WeatherDetails />
           <WeatherDetails />
           <WeatherDetails />
-          <WeatherDetails /> */}
         </div>
 
         <div className={styles.weatherGraph}>
           <DoubleWeatherGraph />
           <XAxis1 data={days}/>
-          <SingleWeatherGraph />
+          <SingleWeatherGraph/>
           <XAxis1 data={time}/>
         </div>
       </div>
