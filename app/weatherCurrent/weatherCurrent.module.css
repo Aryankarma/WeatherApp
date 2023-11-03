@@ -67,6 +67,7 @@
     top: -8%;
     /* animation: spin 5s ease-in-out infinite; */
     z-index: 3;
+    rotate: 0;
 }
 
 .img{
