@@ -177,14 +177,17 @@ export default function Home() {
     "&aqi=yes" + 
     "&alerts=no" ;
 
-    /*
-      startDate = currentDate - 3; // urlHistory - [2023-11-03 - 2023-11-04 - 2023-11-05]
-      endDate = currentDate + 3;   // urlForecast - [2023-11-06(currentDate) - 2023-11-07 - 2023-11-08]
-      
-    */
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const date = today.getDate();
+    const day = today.getDay();
 
-    const startDate = "2023-11-03";
-    const endDate = "2023-11-05";
+    const startDate = year + "-" + month + "-" + (date-4);
+    const endDate = year + "-" + month + "-" + (date-1);
+
+    console.log(day)
+
     const urlHistory = 
     "https://api.weatherapi.com/v1/history.json?key="
     + api +
@@ -196,7 +199,7 @@ export default function Home() {
     endDate;
 
     try {
-      
+
       const currentData = await fetch(urlCurrent);
       const currentDataFinal = await currentData.json();
       
@@ -229,8 +232,34 @@ export default function Home() {
       setsingleGraphDataValue(singleGraphData)
       
       // graph data (double)
-      const dataNew = historyDataFinal.forecast.forecastday[0].day.avgtemp_c;
-      console.log(dataNew)
+      const tempMax = [];
+      const tempMin = [];
+      
+      historyDataFinal.forecast.forecastday.map((input, index)=>{
+
+        tempMax[index] = input.day.maxtemp_c;
+        tempMin[index] = input.day.mintemp_c;
+        // console.log(input.date, input.day.maxtemp_c) // get maxtemp from prev 4 days
+        // console.log(input.date, input.day.mintemp_c) // get mintemp from prev 4 days
+      })
+      
+
+      const lengthMax = tempMax.length;
+      const lengthMin = tempMin.length;
+
+      forecastDataFinal.forecast.forecastday.map((input, index)=>{
+
+        tempMax[lengthMax + index] = input.day.maxtemp_c;
+        tempMin[lengthMin + index] = input.day.mintemp_c;
+        // console.log(input.date, input.day.maxtemp_c) // get maxtemp of current+2 days
+        // console.log(input.date, input.day.mintemp_c) // get mintemp of current+2 days
+      })
+      
+      // setting doubleGraphData data
+      doubleGraphData.forEach((input, index)=>{
+        input.high = tempMax[index]
+        input.low = tempMin[index]
+      })
 
       setdoubleGraphDataValue(doubleGraphData)
 
