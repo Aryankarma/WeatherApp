@@ -1,18 +1,21 @@
-// const data=["Mon", "Tue","Wed","Thu","Fri","Sat","Sun"]
-// const data2 = []
-
 const daysStyle={
     display:"flex",
     width:"730px",
-    justifyContent:"space-between",
-    alignItems:"center",
-
+    justifyContent:"space-around",
+    // alignItems:"center",
+    background: "#151515",
+    borderRadius: "35px",
+    padding: "0 0.5rem",
+    marginTop: "0.75rem"
+}
+const setMargin = {
+    margin: ".75rem 0",
 }
 
 export default function Axis({data}){
     return <div style={daysStyle}>
     {data.map((days)=>{
-        return <p>{days}</p>
+        return <p style={setMargin}>{days}</p>
     })}
     </div>
 }

@@ -18,10 +18,8 @@
 
 body{  
   height: 100vh;
-  background-color: #111111 !important;
-  /* padding: 3rem; */
+  background-color: #101010 !important;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* overflow: hidden; */
 }

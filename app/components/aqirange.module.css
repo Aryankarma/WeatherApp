@@ -1,0 +1,35 @@
+.aqiRange{
+    accent-color: black;
+    -webkit-appearance: none;
+    margin: 1rem 0;
+    margin-right: 15px;
+    width: 500px;
+    height: 5px;
+    border-radius: 5px;
+    background-image: linear-gradient(90deg, #B3AEF5 0%, rgba(238, 85, 153, 0.62) 30.73%, #FF7878 57.29%, #FF3200 74.48%, #FA9D5A 100%);
+    position: relative;
+}
+
+.aqiRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    cursor: grab;
+    border-radius: 50%;
+    background: #111;
+    border: 3px solid #E1E1E1;
+    box-shadow: 0 0 25px 10px #000;
+    width: 12px;
+    height: 12px;
+}
+.headContainer{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+.aqiHeading{
+    font-size: 32px;
+}
+.aqiStatement{
+    color: #6F6F6F;
+    font-weight: 300;
+}

@@ -1,59 +1,6 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-// const data2 = [100,70,110,80,160,100,110,130,90,80,90,85,95]
-
-const data = [
-  {
-    "uv": 100,
-  },
-  {
-    "uv": 70,
-  },
-  {
-    "uv": 110,
-  },
-  {
-    "uv": 80,
-  },
-  {
-    "uv": 160,
-  },
-  {
-    "uv": 100,
-  },
-  {
-    "uv": 110,
-  },
-  {
-    "uv": 130,
-  },
-  {
-    "uv": 90,
-  },
-  {
-    "uv": 80,
-  },
-  {
-    "uv": 90,
-  },
-  {
-    "uv": 85,
-  },
-  {
-    "uv": 95,
-  }
-]
-
-export default function Graph() {
-
-  // const dataRender = data.map((data)=>{
-  //   return data;
-  // })
-
-  // const mainData = data.map((input)=>{
-  //   return input.uv;
-  // })
-
+export default function Graph({data}) {
   return <div>
     <AreaChart width={730} height={150} data={data}
     margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
@@ -65,7 +12,7 @@ export default function Graph() {
       {/* <XAxis axisLine={false} tick={{ fill: '#E1E1E1', fontSize: 16}} dataKey="name" /> */}
       {/* <YAxis axisLine={false} tick={false} /> */}
       {/* <Tooltip /> */}
-      <Area type="monotone" dataKey="uv" strokeWidth={3} stroke="#36A6F6" fillOpacity={1} fill="url(#colorUv1)" />
+      <Area type="monotone" dataKey="value" strokeWidth={3} stroke="#36A6F6" fillOpacity={1} fill="url(#colorUv1)" />
     </AreaChart>
   </div>
 }  
