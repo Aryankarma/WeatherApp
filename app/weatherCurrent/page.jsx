@@ -7,16 +7,23 @@ import WeatherDetails from "../components/WeatherDetailSection";
 import dynamic from 'next/dynamic';
 import XAxis1 from "../components/xaxis";
 import AqiRange from "../components/aqiRange"
+// import WeatherGraphContainer from "../components/WeatherGraphContainer"
+import DoubleWeatherGraph from "../components/doubleWeatherGraph"
+import SingleWeatherGraph from "../components/singleWeatherGraph"
 
-const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
-  ssr: false,
-})
-const SingleWeatherGraph = dynamic(() => import('../components/singleWeatherGraph'), {
-  ssr: false,
-})
+// const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
+//   ssr: false,
+// })
+// const SingleWeatherGraph = dynamic(() => import('../components/singleWeatherGraph'), {
+//   ssr: false,
+// })
+
+// const WeatherGraphContainer = dynamic(() => import('../components/WeatherGraphContainer'), {
+//   ssr: false,
+// })
 
 
-  const singleGraphData = [
+const singleGraphData = [
     {
       "value": 0,
     },{
@@ -69,7 +76,7 @@ const SingleWeatherGraph = dynamic(() => import('../components/singleWeatherGrap
       "value": 0,
     }]
 
-  const doubleGraphData = [
+const doubleGraphData = [
     {
       "high": 0,
       "low": 0,
@@ -99,7 +106,7 @@ const SingleWeatherGraph = dynamic(() => import('../components/singleWeatherGrap
       "low": 0,
     }
   ]
-  const weatherDetailData = [{
+const weatherDetailData = [{
       logo: "images/svgs/thermometer.svg",
       heading: "Feels like",
       sub: "",
@@ -130,9 +137,10 @@ const SingleWeatherGraph = dynamic(() => import('../components/singleWeatherGrap
       sub: "hpa",
       value: ""
     }]
-  const days=["Mon", "Tue","Wed","Thu","Fri","Sat","Sun"]
+
+const days=["Mon", "Tue","Wed","Thu","Fri","Sat","Sun"]
   // const time = ["12pm","1am","2am","3am","4am","5am","6am","7am","8am","9am","10am","11am","12am"] 
-  const time = [ "0", "1", "2", "3", "4", "5", "6", "7", 
+const time = [ "0", "1", "2", "3", "4", "5", "6", "7", 
     "8", "9", "10", "11", "12", "13", "14", "15", 
     "16", "17", "18", "19", "20", "21", "22", "23", "24" ]
 
@@ -141,12 +149,12 @@ const SingleWeatherGraph = dynamic(() => import('../components/singleWeatherGrap
 export default function Home() {
       
       const api = "24951e153ffc4135aeb175518231307";
-      
+
       const formSubmit = (e) => {
         e.preventDefault();
         const rawData = new FormData(e.currentTarget);
         const dataInput = rawData.get("city");
-        console.log(dataInput);
+        // console.log(dataInput);
         fetchWeather(api, dataInput);
       };
 
@@ -186,7 +194,7 @@ export default function Home() {
     const startDate = year + "-" + month + "-" + (date-4);
     const endDate = year + "-" + month + "-" + (date-1);
 
-    console.log(day)
+    // console.log(day)
 
     const urlHistory = 
     "https://api.weatherapi.com/v1/history.json?key="
@@ -200,22 +208,23 @@ export default function Home() {
 
     try {
 
-      const currentData = await fetch(urlCurrent);
-      const currentDataFinal = await currentData.json();
+      const forecastData = await fetch(urlForecast);
+      const forecastDataFinal = await forecastData.json();
+
+      const historyData = await fetch(urlHistory);
+      const historyDataFinal = await historyData.json();
       
       const astroData = await fetch(urlAstro);
       const astroDataFinal = await astroData.json();
       
-      const forecastData = await fetch(urlForecast);
-      const forecastDataFinal = await forecastData.json();
-      
-      const historyData = await fetch(urlHistory);
-      const historyDataFinal = await historyData.json();
+      // checks for error
+      // if(astroDataFinal.error){
+      //   console.log("Error exists")
+      // }
 
-      console.log(currentDataFinal);
-      console.log(astroDataFinal);
       console.log(forecastDataFinal)
       console.log(historyDataFinal)
+      console.log(astroDataFinal);
 
       // graph data (single)
       const forecastDayData = forecastDataFinal.forecast.forecastday[0].hour
@@ -229,6 +238,7 @@ export default function Home() {
         input.value = forecastHourData[index];  
       })
 
+      // console.log("UPDATING DATA: ", singleGraphData)
       setsingleGraphDataValue(singleGraphData)
       
       // graph data (double)
@@ -261,7 +271,10 @@ export default function Home() {
         input.low = tempMin[index]
       })
 
+      // console.log("UPDATING DATA: ", doubleGraphData)
       setdoubleGraphDataValue(doubleGraphData)
+      // setIsDataUpdated(isDataUpdated + 1);
+
 
       // weatherdetailsection
       const feelsLikeValue = forecastDataFinal.current.feelslike_c;
@@ -313,11 +326,11 @@ export default function Home() {
 
       rotateSun(degToRotate);
 
-      
-    
       } catch (error) {
-      console.log(error);
-    }
+        if(error){
+          console.log("city can not be found")
+        }
+      }
   };
   
   // useState hooks
@@ -331,17 +344,24 @@ export default function Home() {
   const [locationValue, setLocationValue] = useState("")
   const [singleGraphDataValue, setsingleGraphDataValue] = useState([])
   const [doubleGraphDataValue, setdoubleGraphDataValue] = useState([])
+  // console.log("consoling: " ,doubleGraphDataValue) 
+  // const [isDataUpdated, setIsDataUpdated] = useState(0);
+
+  // useEffect(()=>{
+  //   console.log("consoling from main component")
+  // }, [])
 
   function rotateSun(rotateValue){
-          
       anime({
         targets: ".chngDeg",
         rotate: rotateValue,
-        duration: 4500,
+        duration: 3000,
         easing:"easeInOutQuad",
         elasticity:200
       })
   }
+
+  // var someUniqueKey = [1,2,3,4,5,6,7,8];
 
   return (
     <div className={styles.homeContainer}>
@@ -423,14 +443,15 @@ export default function Home() {
           })}
         </div>
 
-        <div className={styles.weatherGraph}>
-          <DoubleWeatherGraph data={doubleGraphDataValue}/>
-          <XAxis1 data={days}/>
-          <SingleWeatherGraph data={singleGraphDataValue}/>
-          <XAxis1 data={time}/>
-        </div>
-
+        {/* This WeatherGraphContainer contains both graphs, helps rerender on data update */}
+        {/* <WeatherGraphContainer singleGraphDataValue={singleGraphDataValue} doubleGraphDataValue={doubleGraphDataValue} /> */}
+      <div className={styles.weatherGraph}>
+        <DoubleWeatherGraph data={doubleGraphDataValue} />
+        <XAxis1 data={days} />
+        <SingleWeatherGraph data={singleGraphDataValue} />
+        <XAxis1 data={time} />
       </div>
+       </div>
   </div>
 );
 }
