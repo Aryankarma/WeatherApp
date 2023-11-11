@@ -16,6 +16,10 @@ const fixSize = {
   borderRadius: "30px",
 }
 
+const cssPosition = {
+  translateY: "-50%"
+}
+
 export default function Graph({data}){
 
   function createUniqueKey() {
@@ -81,7 +85,7 @@ export default function Graph({data}){
         <stop stopColor="#161B16" stopOpacity={1} />
       </linearGradient> 
       </defs>
-      <Tooltip content={<CustomTooltip />} />
+      <Tooltip style={cssPosition} animationDuration={1000} content={<CustomTooltip />} />
       <Area animationDuration={3000} type="monotone" key={key + 1} dataKey="high" strokeWidth={3} stroke="#FF5912" fillOpacity={1} fill="url(#colorUv)" />
       <Area animationDuration={3000} type="monotone" key={key + 2} dataKey="low" strokeWidth={3} stroke="#90EE90" fillOpacity={1} fill="url(#colorPv)" />
     </AreaChart>

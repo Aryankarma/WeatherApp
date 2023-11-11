@@ -128,7 +128,7 @@ export default function Graph({data}) {
           <stop stopColor="#12171B" stopOpacity={1} />
         </linearGradient>
       </defs>
-      <Tooltip content={<CustomTooltip />} />
+      <Tooltip animationDuration={1000} content={<CustomTooltip />} />
       <Area animationDuration={3000} type="monotone" key={key} dataKey="value" strokeWidth={3} stroke="#36A6F6" fillOpacity={1} fill="url(#colorUv1)" />
     </AreaChart>
   </div>

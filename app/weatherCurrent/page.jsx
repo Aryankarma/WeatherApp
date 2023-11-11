@@ -10,6 +10,7 @@ import AqiRange from "../components/aqiRange"
 // import WeatherGraphContainer from "../components/WeatherGraphContainer"
 import DoubleWeatherGraph from "../components/doubleWeatherGraph"
 import SingleWeatherGraph from "../components/singleWeatherGraph"
+import Greeting from "../components/Greeting";
 
 // const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
 //   ssr: false,
@@ -144,19 +145,47 @@ const time = [ "0", "1", "2", "3", "4", "5", "6", "7",
     "8", "9", "10", "11", "12", "13", "14", "15", 
     "16", "17", "18", "19", "20", "21", "22", "23", "24" ]
 
-  
 // function Home()
 export default function Home() {
       
-      const api = "24951e153ffc4135aeb175518231307";
+  // useState hooks
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(null);
+  const [aqiRangeValue, updateAqiRangeValue] = useState(0);
+  const [sunriseTime, setSunriseTime] = useState("")
+  const [sunsetTime, setSunsetTime] = useState("")
+  const [tempValue, setTempValue] = useState(0)
+  const [conditionValue, setConditionValue] = useState("")
+  const [minTempValue, setminTempValue] = useState(0)
+  const [maxTempValue, setmaxTempValue] = useState(0)
+  const [locationValue, setLocationValue] = useState("")
+  const [singleGraphDataValue, setsingleGraphDataValue] = useState([])
+  const [doubleGraphDataValue, setdoubleGraphDataValue] = useState([])
+  const [effect, executeEffect] = useState(0)
+  const [hour, setHour] = useState(0)
 
-      const formSubmit = (e) => {
-        e.preventDefault();
-        const rawData = new FormData(e.currentTarget);
-        const dataInput = rawData.get("city");
-        // console.log(dataInput);
-        fetchWeather(api, dataInput);
-      };
+  // geolocation api
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+        executeEffect(1);
+      },(error) => {
+        console.log(error);
+      });
+    }
+  }, []);
+
+  const api = "24951e153ffc4135aeb175518231307";
+
+  const formSubmit = (e) => {
+    e.preventDefault();
+    const rawData = new FormData(e.currentTarget);
+    const dataInput = rawData.get("city");
+    // console.log(dataInput);
+    fetchWeather(api, dataInput);
+  };
 
   // fetching api
   const fetchWeather = async (api, city) => {
@@ -273,8 +302,6 @@ export default function Home() {
 
       // console.log("UPDATING DATA: ", doubleGraphData)
       setdoubleGraphDataValue(doubleGraphData)
-      // setIsDataUpdated(isDataUpdated + 1);
-
 
       // weatherdetailsection
       const feelsLikeValue = forecastDataFinal.current.feelslike_c;
@@ -308,12 +335,13 @@ export default function Home() {
 
       var aqiRangeValue = forecastDataFinal.current.air_quality.pm2_5;
       let y = forecastDataFinal.location.localtime;
-      updateAqiRangeValue(aqiRangeValue);
+      updateAqiRangeValue(aqiRangeValue)
 
       const slicefrom = y.length - (y.length - (length-5));
       let currentTime = (y.slice(slicefrom, y.length)).slice(0, 2) ;
 
       currentTime = parseInt(currentTime)
+      setHour(currentTime)
       let degToRotate = ((currentTime - 6) * 7.5)
 
       // console.log(degToRotate)
@@ -328,42 +356,35 @@ export default function Home() {
 
       } catch (error) {
         if(error){
-          console.log("city can not be found")
+          console.log(error)
         }
       }
   };
   
-  // useState hooks
-  const [aqiRangeValue, updateAqiRangeValue] = useState(0);
-  const [sunriseTime, setSunriseTime] = useState("")
-  const [sunsetTime, setSunsetTime] = useState("")
-  const [tempValue, setTempValue] = useState(0)
-  const [conditionValue, setConditionValue] = useState("")
-  const [minTempValue, setminTempValue] = useState(0)
-  const [maxTempValue, setmaxTempValue] = useState(0)
-  const [locationValue, setLocationValue] = useState("")
-  const [singleGraphDataValue, setsingleGraphDataValue] = useState([])
-  const [doubleGraphDataValue, setdoubleGraphDataValue] = useState([])
-  // console.log("consoling: " ,doubleGraphDataValue) 
-  // const [isDataUpdated, setIsDataUpdated] = useState(0);
 
-  // useEffect(()=>{
-  //   console.log("consoling from main component")
-  // }, [])
+  // fetch api if location provided
+  useEffect(()=>{
+    if(latitude){
+      const city = latitude + ","  + longitude;
+      fetchWeather(api, city);
+    }else{
+      fetchWeather(api, "New delhi");
+      console.log("permission rejecteded")
+    }
+  },[effect])
+
 
   function rotateSun(rotateValue){
-      anime({
-        targets: ".chngDeg",
-        rotate: rotateValue,
-        duration: 3000,
-        easing:"easeInOutQuad",
-        elasticity:200
-      })
+    anime({
+      targets: ".chngDeg",
+      rotate: rotateValue,
+      duration: 3000,
+      easing:"easeInOutQuad",
+      elasticity:200
+    })
   }
 
-  // var someUniqueKey = [1,2,3,4,5,6,7,8];
-
-  return (
+  return ( <>
     <div className={styles.homeContainer}>
       <div className={styles.leftContent}>
 
@@ -371,16 +392,33 @@ export default function Home() {
 
         <input
           autoFocus="true"
-          className="outline text-black rounded outline-2 p-5 w-1/2"
+          className={styles.searchBox}
           type="text"
-          placeholder="enter your city"
+          placeholder="Enter city"
           name="city"
+          // autocomplete="off"
           />
-        <button className="btn p-5" type="submit">
+        <button className={styles.searchButton} type="submit">
           Search
         </button>
       </form>
 
+
+      <div className={styles.mainWeather}>
+          <img className={styles.conditionImg} src="images/weatherCondition/cloudStrike.png" alt="" />          
+        <div id={styles.tempCondition}>
+          <span className={styles.temp}>{tempValue}<sup id={styles.degreeUnit}>°C</sup></span>
+          <br/>
+          {/* <span id={styles.degreeUnit}>°C</span> */}
+          <span id={styles.condition}>{conditionValue}, {minTempValue}°/{maxTempValue}°</span>
+        </div>  
+      
+        <div id={styles.location1}>
+          <img className={styles.svgLocation} src="images/svgs/locationLogo.svg" alt="" />
+          <h1>{locationValue}</h1>
+        </div>
+      </div>
+      
       <AqiRange range={aqiRangeValue}/>
 
       <div className={styles.sunContainer}>
@@ -413,45 +451,29 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.mainWeather}>
-
-        {/* <div className={styles.conditionImgCont}> */}
-          <img className={styles.conditionImg} src="images/weatherCondition/cloudStrike.png" alt="" />          
-        {/* </div> */}
-
-        <div id={styles.tempCondition}>
-          <span className={styles.temp}>{tempValue}<sup id={styles.degreeUnit}>°C</sup></span>
-          <br/>
-          {/* <span id={styles.degreeUnit}>°C</span> */}
-          <span id={styles.condition}>{conditionValue}, {minTempValue}°/{maxTempValue}°</span>
-        </div>  
-      
-        <div id={styles.location1}>
-          <img className={styles.svgLocation} src="images/svgs/locationLogo.svg" alt="" />
-          <h1>{locationValue}</h1>
-        </div>
-  
-      </div>
-  
     </div>
 
-      <div className={styles.rightContainer}>
-
-        <div className={styles.weatherDetailContainer}>
-          {weatherDetailData.map((input)=>{
-            return <WeatherDetails value={input.value} sub={input.sub} heading={input.heading} logo={input.logo}/>
-          })}
-        </div>
-
-        {/* This WeatherGraphContainer contains both graphs, helps rerender on data update */}
-        {/* <WeatherGraphContainer singleGraphDataValue={singleGraphDataValue} doubleGraphDataValue={doubleGraphDataValue} /> */}
+    <div className={styles.rightContainer}>
+       
       <div className={styles.weatherGraph}>
-        <DoubleWeatherGraph data={doubleGraphDataValue} />
-        <XAxis1 data={days} />
         <SingleWeatherGraph data={singleGraphDataValue} />
         <XAxis1 data={time} />
+        <DoubleWeatherGraph data={doubleGraphDataValue} />
+        <XAxis1 data={days} />
       </div>
-       </div>
+
+      <div className={styles.weatherDetailContainer}>
+        {weatherDetailData.map((input)=>{
+          return <WeatherDetails value={input.value} sub={input.sub} heading={input.heading} logo={input.logo}/>
+        })}
+      </div>
+
+    </div>
+
+
   </div>
+  <Greeting hour={hour}/>
+  <div className={styles.tagLine}>Made with <span style={{color: "red"}}>❤️</span> by Aryxn</div>
+  </>
 );
 }
