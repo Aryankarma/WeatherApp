@@ -1,8 +1,10 @@
+.aqiContainer{
+    width: 500px;
+}
 .aqiRange{
     accent-color: black;
     -webkit-appearance: none;
     margin: 1rem 0;
-    margin-right: 15px;
     width: 500px;
     height: 5px;
     border-radius: 5px;
@@ -21,13 +23,12 @@
     height: 12px;
 }
 .headContainer{
-    margin-top: 3rem;
     display: flex;
     flex-direction: row;
     gap: 15px;
 }
 .aqiHeading{
-    font-size: 32px;
+    font-size: 30px;
 }
 .aqiStatement{
     color: #aaa;

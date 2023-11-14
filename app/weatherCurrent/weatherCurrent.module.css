@@ -1,53 +1,47 @@
 .homeContainer{
     display: flex;
     justify-content: space-around;
-    flex-direction: row;   
-    gap: 4rem;
+    flex-direction: column;   
+    width: 100%;
+    height: 100%;
 }
-.leftContent{
+.header{
+    padding: 1rem 1.25rem 1rem 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.topContent, .bottomContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100vw;
+    /* padding: 2rem; */
+    /* gap: 10%; */
+}
+/* .bottomContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+} */
+.bottomLeftContainer{
     display: flex;
     flex-direction: column;
+    width: 500px;
     justify-content: center;
     align-items: center;
-}
-.rightContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 45vw;
-    height: 90vh;
-    /* background-color: #333; */
-    /* background-color: #101010; */
-    border-radius: 2rem;
-}
-.aqiRange{
-    accent-color: black;
-    -webkit-appearance: none;
-    margin-right: 15px;
-    margin-top: 3rem;
-    width: 400px;
-    height: 5px;
-    border-radius: 5px;
-    background-image: linear-gradient(90deg, #B3AEF5 0%, rgba(238, 85, 153, 0.62) 30.73%, #FF7878 57.29%, #FF3200 74.48%, #FA9D5A 100%);
-    position: relative;
-}
-
-.aqiRange::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    cursor: grab;
-    border-radius: 50%;
-    background: #111;
-    border: 3px solid #E1E1E1;
-    box-shadow: 0 0 25px 10px #000;
-    width: 12px;
-    height: 12px;
 }
 
 /* css for new sunrise animation */
 .blackShade,#circlePath,.sunContainer{
     margin-top: 2rem;
 }
+
 .blackShade{
     position: absolute;
     height: 130px;
@@ -81,15 +75,14 @@
 .sunContainer{      
     display: flex;
     height: 160px;
-    width: fit-content;
+    width: 500px;
+    justify-content: center;
     padding: 1rem;
     /* background-color: #151515; */
     background-color: #222;
-    border-radius: 25px;
+    border-radius: 25px; 
     z-index: 0;
     position: relative;
-    /* overflow hiden rectangle */
-    /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); */
 }
 .item {
     width: 30px;
@@ -119,7 +112,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 1rem;
+    /* padding: 0 1rem; */
     font-size: 12px;
     font-weight: 200;
 }
@@ -141,14 +134,26 @@
     flex-direction: column;
     align-items: center;
 }
+.bgImage{
+    width: 500px;
+    height: 385px;
+} 
 .mainWeather{
-    background-image: url("../../public/images/bgMain.png");
+    /* background-image: url("../../public/images/bgMain.png"); */
     /* filter: blur(1%); */
-    width: 550px;
+    width: auto;
     background-repeat: no-repeat;
-    height: 450px;
-    margin: 2rem;
+    height: 100%;
+    /* margin: 2rem; */
     position: relative;
+}
+.weatherGraph{    
+    width: 600px;
+    justify-content: space-between;
+    height: 385px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 #tempCondition{
     position: absolute;
@@ -193,11 +198,17 @@
     top:0;
     right:0;
     transform: translate(30%,-25%);
+    z-index: 10;
 }
 .weatherDetailContainer{
     display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 40px; /*edit*/ 
+    grid-template-columns: repeat(3, 160px);
+    grid-template-rows: repeat(2, 130px);
+    grid-row-gap: 12.5%;
+    grid-column-gap: 7.75%;
+    /* justify-content: space-between; */
+    width: 600px;
+    height: 300px;  
 }
 .tagLine{
     position: absolute;
@@ -207,10 +218,10 @@
 }
 .searchBox{
     padding: 10px 25px;
-    width: 25vw;
+    width: 52vw;
     outline: 2px solid #FFF;
     border-radius: 50px;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
     background-color: transparent;
 }
 .searchButton{
@@ -218,6 +229,7 @@
     margin-bottom: 2rem;
     color: white;
     font-size: large;
+    display: none;
 }
 .searchBox::-webkit-suggestions-box, .searchBox:moz-suggestions-box,
 .searchBox:suggestions-box{

@@ -8,14 +8,6 @@ const tooltipStyles = {
   fontWeight: 600
 }
 
-const fixSize = {
-  width:"730px",
-  display:"flex",
-  alignItems:"center",
-  justifyContent:"center",
-  borderRadius: "30px",
-}
-
 export default function Graph({data}) {
   
   function createUniqueKey() {
@@ -120,8 +112,8 @@ export default function Graph({data}) {
     </div>;
   };
 
-  return <div style={fixSize}>
-    <AreaChart width={730} height={150} key={key} data={data}
+  return <div>
+    <AreaChart width={600} height={125} key={key} data={data}
     margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
       <defs>
         <linearGradient id="colorUv1" x1="0" y1="0" x2="0" y2="1">

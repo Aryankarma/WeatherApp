@@ -1,9 +1,9 @@
 .detailBox{
-    height: 140px;
-    width: 210px;
+    height: 130px;
+    width: 185px;
     border-radius: 25px;
     background: #151515;
-    padding: 1.5rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -18,7 +18,7 @@
 }
 .value{
     color: #E1E1E1;
-    font-size: 45px;
+    font-size: 35px;
     font-weight: 600;
     transform: translateY(15%);
 }

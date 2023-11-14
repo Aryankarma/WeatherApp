@@ -11,6 +11,9 @@ import AqiRange from "../components/aqiRange"
 import DoubleWeatherGraph from "../components/doubleWeatherGraph"
 import SingleWeatherGraph from "../components/singleWeatherGraph"
 import Greeting from "../components/Greeting";
+import Lottie from 'react-lottie'
+import AnimatedLogo from "../components/animatesLogo" 
+import animationData from "../../public/images/json/logo.json"
 
 // const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
 //   ssr: false,
@@ -26,8 +29,6 @@ import Greeting from "../components/Greeting";
 
 const singleGraphData = [
     {
-      "value": 0,
-    },{
       "value": 0,
     },{
       "value": 0,
@@ -141,9 +142,9 @@ const weatherDetailData = [{
 
 const days=["Mon", "Tue","Wed","Thu","Fri","Sat","Sun"]
   // const time = ["12pm","1am","2am","3am","4am","5am","6am","7am","8am","9am","10am","11am","12am"] 
-const time = [ "0", "1", "2", "3", "4", "5", "6", "7", 
+const time = [ "1", "2", "3", "4", "5", "6", "7", 
     "8", "9", "10", "11", "12", "13", "14", "15", 
-    "16", "17", "18", "19", "20", "21", "22", "23", "24" ]
+    "16", "17", "18", "19", "20", "21", "22", "23", "24"]
 
 // function Home()
 export default function Home() {
@@ -386,26 +387,36 @@ export default function Home() {
 
   return ( <>
     <div className={styles.homeContainer}>
-      <div className={styles.leftContent}>
 
-      <form action="" onSubmit={(e) => formSubmit(e)}>
+      <div className={styles.header}>
 
-        <input
-          autoFocus="true"
-          className={styles.searchBox}
-          type="text"
-          placeholder="Enter city"
-          name="city"
-          // autocomplete="off"
-          />
-        <button className={styles.searchButton} type="submit">
-          Search
-        </button>
-      </form>
+        <Greeting hour={hour}/>
 
+        <form action="" onSubmit={(e) => formSubmit(e)}>
+          <input
+            autoFocus="true"
+            className={styles.searchBox}
+            type="text"
+            placeholder="Enter city"
+            name="city"
+            />
+          <button className={styles.searchButton} type="submit">
+            Search
+          </button>
+        </form>
+
+        <img src="images/svgs/location.svg" alt="locationLogo" />
+        <img src="images/svgs/setting.svg" alt="settingLogo" />
+
+      </div>
+
+
+      <div className={styles.topContent}>
 
       <div className={styles.mainWeather}>
-          <img className={styles.conditionImg} src="images/weatherCondition/cloudStrike.png" alt="" />          
+        <img className={styles.bgImage} src="images/bgMain.png" alt="" />
+        <img className={styles.conditionImg} src="images/weatherCondition/cloudStrike.png" alt="" />          
+        
         <div id={styles.tempCondition}>
           <span className={styles.temp}>{tempValue}<sup id={styles.degreeUnit}>°C</sup></span>
           <br/>
@@ -418,7 +429,25 @@ export default function Home() {
           <h1>{locationValue}</h1>
         </div>
       </div>
+
+      <div className={styles.weatherGraph}>
+        <div>
+          <SingleWeatherGraph data={singleGraphDataValue} />
+          <XAxis1 data={time} />
+        </div>
+        <div>
+          <DoubleWeatherGraph data={doubleGraphDataValue} />
+          <XAxis1 data={days} />
+        </div>
       
+      </div>
+
+    </div>
+
+    <div className={styles.bottomContent}>
+       
+    <div className={styles.bottomLeftContainer}>
+
       <AqiRange range={aqiRangeValue}/>
 
       <div className={styles.sunContainer}>
@@ -450,17 +479,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-    </div>
-
-    <div className={styles.rightContainer}>
-       
-      <div className={styles.weatherGraph}>
-        <SingleWeatherGraph data={singleGraphDataValue} />
-        <XAxis1 data={time} />
-        <DoubleWeatherGraph data={doubleGraphDataValue} />
-        <XAxis1 data={days} />
-      </div>
+</div>
 
       <div className={styles.weatherDetailContainer}>
         {weatherDetailData.map((input)=>{
@@ -472,8 +491,9 @@ export default function Home() {
 
 
   </div>
-  <Greeting hour={hour}/>
+
   <div className={styles.tagLine}>Made with <span style={{color: "red"}}>❤️</span> by Aryxn</div>
+
   </>
 );
 }

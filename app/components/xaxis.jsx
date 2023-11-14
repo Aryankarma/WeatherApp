@@ -1,6 +1,6 @@
 const daysStyle={
     display:"flex",
-    width:"730px",
+    width:"600px",
     justifyContent:"space-around",
     // alignItems:"center",
     background: "#151515",
@@ -9,7 +9,8 @@ const daysStyle={
     marginTop: "0.75rem"
 }
 const setMargin = {
-    margin: ".75rem 0",
+    margin: ".5rem 0",
+    fontSize: ".9rem"
 }
 
 export default function Axis({data}){

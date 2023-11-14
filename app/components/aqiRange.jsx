@@ -38,7 +38,7 @@ export default function AqiRange({range}){
         statement = "Hazardous: Protect Your Health, Stay In."
     }
 
-    return <div>
+    return <div className={styles.aqiContainer}>
         <div className={styles.headContainer}>
             <img src="images/svgs/airQualityLogo.svg" alt="" /><h1 className={styles.aqiHeading}>Air Quality - {range} ({airHealth}) </h1>
         </div>
