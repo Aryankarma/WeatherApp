@@ -3,7 +3,7 @@ let greet = ""
 const styles = {
     fontSize: "40px",
     fontStyle: "normal",
-    fontWeight: 800,
+    fontWeight: 700,
     // padding: ".5rem 1rem",
     color: "#eee"  
 }

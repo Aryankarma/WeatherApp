@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { AreaChart, wrapperStyle, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const tooltipStyles = {
@@ -9,6 +10,14 @@ const tooltipStyles = {
 }
 
 export default function Graph({data}){
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const style = document.createElement('style');
+      style.innerHTML = '.recharts-surface { border-radius: 20px; }'; 
+      document.head.appendChild(style);
+    }
+  }, []);
 
   function createUniqueKey() {
     const oldkey = Math.floor(Math.random()*100)
