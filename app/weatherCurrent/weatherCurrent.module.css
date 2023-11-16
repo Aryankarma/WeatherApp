@@ -16,11 +16,9 @@
 .topContent, .bottomContent{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     width: 100vw;
-    /* padding: 2rem; */
-    /* gap: 10%; */
 }
 /* .bottomContent{
     display: flex;
@@ -214,7 +212,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    padding: .3rem .5rem;
+    padding: .1rem .4rem;
     font-weight: 100;
     letter-spacing: 1px;
     font-size: 0.75rem;
