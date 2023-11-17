@@ -9,6 +9,13 @@ const tooltipStyles = {
   fontWeight: 600
 }
 
+
+const graphName = {
+  position: "absolute",
+  top: "7.5px",
+  zIndex : "2"
+}
+
 export default function Graph({data}){
 
   useEffect(() => {
@@ -71,7 +78,8 @@ export default function Graph({data}){
   };
   
 
-  return <div>
+  return <div style={{position: "relative"}}>
+    <span style={graphName}>7D forecast</span>
   <AreaChart key={key} width={600} height={125} data={data}
     margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>
     <defs>        

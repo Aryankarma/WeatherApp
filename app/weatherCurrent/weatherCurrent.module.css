@@ -45,8 +45,8 @@
     height: 130px;
     width: 400px;
     bottom: 5%;
-    /* background: linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #151515 43.23%); */
-    background: linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #222 43.23%);
+    background: linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #151515 43.23%);
+    /* background: linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #222 43.23%); */
     z-index: 2; 
 }
 #circlePath{
@@ -76,8 +76,8 @@
     width: 500px;
     justify-content: center;
     padding: 1rem;
-    /* background-color: #151515; */
-    background-color: #222;
+    background-color: #151515;
+    /* background-color: #222; */
     border-radius: 25px; 
     z-index: 0;
     position: relative;
@@ -178,6 +178,8 @@
     width: fit-content;
     bottom:0;
     font-size: 32px;
+    font-weight: 300;
+    color: #eee;
     display: flex;
     flex-direction: row;
     position: absolute;

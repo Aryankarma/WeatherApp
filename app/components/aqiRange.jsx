@@ -3,6 +3,7 @@ import styles from "../components/aqirange.module.css"
 export default function AqiRange({range}){
     let airHealth = "";
     let statement = "";
+    range = Math.floor(range)
 
     if(range > 500){
         range = 500;
@@ -18,7 +19,7 @@ export default function AqiRange({range}){
     }else if(range < 200){
         airHealth = "Unhealthy"
     }else if(range < 300){
-        airHealth = "Very unhealthy"
+        airHealth = "Dangerous"
     }else if(range < 500){
         airHealth = "Hazardous"
     }
@@ -40,7 +41,7 @@ export default function AqiRange({range}){
 
     return <div className={styles.aqiContainer}>
         <div className={styles.headContainer}>
-            <img src="images/svgs/airQualityLogo.svg" alt="" /><h1 className={styles.aqiHeading}>Air Quality - {range} ({airHealth}) </h1>
+            <img src="images/svgs/airQualityLogo.svg" alt="" /><h1 id="heading" className={styles.aqiHeading}>Air Quality - {range} ({airHealth}) </h1>
         </div>
         <input
             max={500}

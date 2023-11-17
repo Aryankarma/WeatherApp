@@ -8,6 +8,12 @@ const tooltipStyles = {
   fontWeight: 600
 }
 
+const graphName = {
+  position: "absolute",
+  top: "7.5px",
+  zIndex : "2"
+}
+
 export default function Graph({data}) {
   
   function createUniqueKey() {
@@ -112,7 +118,8 @@ export default function Graph({data}) {
     </div>;
   };
 
-  return <div>
+  return <div style={{position:"relative"}}>
+    <span style={graphName}>24hr forecast</span>
     <AreaChart width={600} height={125} key={key} data={data}
     margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
       <defs>
