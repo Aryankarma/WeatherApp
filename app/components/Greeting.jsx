@@ -1,12 +1,6 @@
-let greet = ""
+import styles from "./Greeting.module.css"
 
-const styles = {
-    fontSize: "40px",
-    fontStyle: "normal",
-    fontWeight: 700,
-    // padding: ".5rem 1rem",
-    color: "#eee"  
-}
+let greet = ""
 
 export default function ({hour}){
     
@@ -20,7 +14,7 @@ export default function ({hour}){
         greet = "Good night"
     }
     
-    return <div style={styles}>
+    return <div className={styles.greeting}>
         <h1> {greet} </h1>
     </div>
 }

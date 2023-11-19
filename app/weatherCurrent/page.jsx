@@ -112,32 +112,32 @@ const weatherDetailData = [{
       logo: "images/svgs/thermometer.svg",
       heading: "Feels like",
       sub: "",
-      value: ""
+      value: "0"
     },{
       logo: "images/svgs/windspeedLogo.svg",
       heading: "Wind speed",
       sub: "mi/h",
-      value: ""
+      value: "0"
     },{
       logo: "images/svgs/humidityLogo.svg",
       heading: "Humidity",
       sub: "%",
-      value: ""
+      value: "0"
     },{
       logo: "images/svgs/sunLogo.svg",
       heading: "UV",
       sub: "very weak",
-      value: ""
+      value: "0"
     },{
       logo: "images/svgs/visibilityLogo.svg",
       heading: "Visibility",
       sub: "km",
-      value: ""
+      value: "0"
     },{
       logo: "images/svgs/airpressurelogo.svg",
       heading: "Air pressure",
       sub: "hpa",
-      value: ""
+      value: "0"
     }]
 
 const days=["Mon", "Tue","Wed","Thu","Fri","Sat","Sun"]
@@ -329,6 +329,7 @@ export default function Home() {
       
       const currentCelciusTemp = forecastDataFinal.current.temp_c
       setTempValue(Math.round(currentCelciusTemp))
+      // setTempAnimation(Math.round(currentCelciusTemp))
       setConditionValue(forecastDataFinal.current.condition.text)
       setminTempValue(Math.round(forecastDataFinal.forecast.forecastday[0].day.mintemp_c))
       setmaxTempValue(Math.round(forecastDataFinal.forecast.forecastday[0].day.maxtemp_c))
@@ -375,6 +376,25 @@ export default function Home() {
   },[effect])
 
 
+
+  // function setTempAnimation(tempValue){
+  //   var logEl = document.querySelector('#tempratureAnimation');
+
+  //   var battery = {
+  //     cycles: 0
+  //   }
+
+  //   anime({
+  //     targets: battery,
+  //     cycles: tempValue,
+  //     round: 1,
+  //     easing: 'easeInOutQuad',
+  //     update: function() {
+  //       logEl.innerHTML = JSON.stringify(battery.cycles);
+  //     }
+  //   });
+  // }
+  
   function rotateSun(rotateValue){
     anime({
       targets: ".chngDeg",
@@ -390,24 +410,23 @@ export default function Home() {
 
       <div className={styles.header}>
 
-        <Greeting hour={hour}/>
+        {/* <Greeting hour={hour}/> */}
 
-        <form action="" onSubmit={(e) => formSubmit(e)}>
-          <input
-            autoFocus="true"
-            className={styles.searchBox}
-            type="text"
-            placeholder="Enter city"
-            name="city"
-            />
-          <button className={styles.searchButton} type="submit">
-            Search
-          </button>
-        </form>
+          <form action="" onSubmit={(e) => formSubmit(e)}>
+            <input
+              autoFocus="true"
+              className={styles.searchBox}
+              type="text"
+              placeholder="Enter city"
+              name="city"
+              />
+            <button className={styles.searchButton} type="submit">
+              Search
+            </button>
+          </form>
 
-        <img src="images/svgs/location.svg" alt="locationLogo" />
-        <img src="images/svgs/setting.svg" alt="settingLogo" />
-
+          {/* <img className={styles.img1} src="images/svgs/location.svg" alt="locationLogo" />
+          <img className={styles.img2} src="images/svgs/setting.svg" alt="settingLogo" /> */}
       </div>
 
 
@@ -418,7 +437,8 @@ export default function Home() {
         <img className={styles.conditionImg} src="images/weatherCondition/cloudStrike.png" alt="" />          
         
         <div id={styles.tempCondition}>
-          <span className={styles.temp}>{tempValue}<sup id={styles.degreeUnit}>°C</sup></span>
+          <span id="tempratureAnimation" className={styles.temp}>{tempValue}<sup id={styles.degreeUnit}>°C</sup></span>
+          {/* <span id="tempratureAnimation" className={styles.temp}>0<sup id={styles.degreeUnit}>°C</sup></span> */}
           <br/>
           {/* <span id={styles.degreeUnit}>°C</span> */}
           <span id={styles.condition}>{conditionValue}, {minTempValue}°/{maxTempValue}°</span>

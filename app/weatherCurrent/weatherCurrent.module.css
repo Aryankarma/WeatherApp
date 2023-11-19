@@ -1,24 +1,26 @@
 .homeContainer{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: column;   
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 95%;
+    align-items: center;
 }
 .header{
-    padding: 1rem 1.25rem 1rem 0;
-    width: 100vw;
+    /* margin-bottom: 2rem; */
+    width: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 .topContent, .bottomContent{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    width: 100vw;
+    width: 90%;
+    align-items: center;
 }
 /* .bottomContent{
     display: flex;
@@ -133,16 +135,13 @@
     align-items: center;
 }
 .bgImage{
-    width: 500px;
-    height: 385px;
+    max-width: 100%;
+    height: auto;
 } 
 .mainWeather{
-    /* background-image: url("../../public/images/bgMain.png"); */
-    /* filter: blur(1%); */
     width: auto;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; 
     height: 100%;
-    /* margin: 2rem; */
     position: relative;
 }
 .weatherGraph{    
@@ -206,7 +205,7 @@
     grid-template-rows: repeat(2, 130px);
     grid-row-gap: 12.5%;
     grid-column-gap: 7.75%;
-    /* justify-content: space-between; */
+    justify-content: center;
     width: 600px;
     height: 300px;  
 }
@@ -221,11 +220,12 @@
 }
 .searchBox{
     padding: 10px 25px;
-    width: 52vw;
+    width: 55vw;
     outline: 2px solid #FFF;
     border-radius: 50px;
     /* margin-bottom: 2rem; */
     background-color: transparent;
+    font-weight: 300;
 }
 .searchButton{
     margin-left: 2rem;
@@ -237,4 +237,69 @@
 .searchBox::-webkit-suggestions-box, .searchBox:moz-suggestions-box,
 .searchBox:suggestions-box{
     color: red;
+}
+
+
+/* Media Queries */
+ 
+/* Small smartphones (iPhone 4, Galaxy S2, etc.) */
+@media only screen and (min-width : 475px){
+
+
+}
+
+
+/* Medium smartphones (iPhone 5, Galaxy S3, etc.) */
+@media only screen and (min-width : 640px){
+    
+
+
+}
+
+
+/* Large smartphones and small tablets (iPad mini, Nexus 7, etc.) */
+@media only screen and (min-width : 768px){
+    .img1{
+        height: 30px;
+    }    
+    .img2{
+        height: 25px;
+    }
+    .searchBox{
+        padding: 2px 10px;
+    }
+}
+
+
+/* Medium tablets (iPad 2, Galaxy Tab 10.1, etc.) */
+@media only screen and (min-width : 1024px){
+
+    .homeContainer{
+        width: 95%;
+        /* background-color: green; */
+    }
+
+    .searchBox{
+        padding: 8px 25px;
+    }
+}
+
+
+/* Large tablets and small laptops (MacBook Air 11", etc.) 75%-80% */
+@media only screen and (min-width : 1200px){
+    
+    .homeContainer{
+        /* background: red; */
+    }
+
+}
+ 
+
+/* Large laptops and desktops (iMac 27", MacBook Pro 15", etc.) <=67% */
+@media only screen and (min-width : 1536px){
+
+    .homeContainer{
+        /* background : white; */
+    }
+
 }

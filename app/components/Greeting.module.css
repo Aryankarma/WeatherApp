@@ -1,0 +1,22 @@
+.greeting{
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    /* padding: .5ren 1rem; */
+    color: #eee;
+}
+
+
+/* Medium tablets (iPad 2, Galaxy Tab 10.1, etc.) */
+@media only screen and (max-width : 1024px){
+    .greeting{
+        font-size: 35px;
+    }
+}
+
+/* Large smartphones and small tablets (iPad mini, Nexus 7, etc.) */
+@media only screen and (max-width : 768px){
+    .greeting{
+        font-size: 30px;
+    }
+}
