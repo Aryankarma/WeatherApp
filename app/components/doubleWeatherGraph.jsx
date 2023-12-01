@@ -21,7 +21,7 @@ export default function Graph({data}){
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const style = document.createElement('style');
-      style.innerHTML = '.recharts-surface { border-radius: 20px; }'; 
+      style.innerHTML = '.recharts-surface { border-radius: 17.5px; }'; 
       document.head.appendChild(style);
     }
   }, []);
@@ -80,7 +80,7 @@ export default function Graph({data}){
 
   return <div style={{position: "relative"}}>
     <span style={graphName}>7D forecast</span>
-  <AreaChart key={key} width={600} height={125} data={data}
+  <AreaChart key={key} width={600} height={105} data={data}
     margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>
     <defs>        
       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

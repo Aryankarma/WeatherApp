@@ -1,7 +1,7 @@
 .detailBox{
-    min-height: 130px;
-    min-width: 185px;
-    border-radius: 25px;
+    height: 105px;
+    width: 165px;
+    border-radius: 17.5px;
     background: #151515;
     padding: 1rem;
     display: flex;
@@ -13,18 +13,18 @@
     flex-direction: row;
     gap: 11px;
     color: #aaa;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 300;
 }
 .value{
     color: #E1E1E1;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 600;
     transform: translateY(15%);
 }
 .sub{
     color: #E1E1E1;
-    font-size: 12px;
+    font-size: 11px;
     font-style: normal;
     font-weight: 500;
     bottom: 0;

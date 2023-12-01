@@ -5,12 +5,13 @@ const daysStyle={
     // alignItems:"center",
     background: "#151515",
     borderRadius: "35px",
-    padding: "0 0.5rem",
-    marginTop: "0.75rem"
+    padding: "0 0.25rem",
+    marginTop: "0.5rem",
+    fontWeight: 100,
 }
 const setMargin = {
-    margin: ".5rem 0",
-    fontSize: ".9rem"
+    margin: ".2rem 0",
+    fontSize: ".75rem",
 }
 
 export default function Axis({data}){

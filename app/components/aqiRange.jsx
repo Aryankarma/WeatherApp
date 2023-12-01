@@ -51,7 +51,7 @@ export default function AqiRange({range}){
             name="aqi"
             id="aqiRange"
             />
-        <h4 className={styles.aqiStatement}>{range} - {statement}</h4>
+        <h6 className={styles.aqiStatement}>{range} - {statement}</h6>
     </div>
 }
 

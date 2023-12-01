@@ -120,7 +120,7 @@ export default function Graph({data}) {
 
   return <div style={{position:"relative"}}>
     <span style={graphName}>24hr forecast</span>
-    <AreaChart width={600} height={125} key={key} data={data}
+    <AreaChart width={600} height={105} key={key} data={data}
     margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
       <defs>
         <linearGradient id="colorUv1" x1="0" y1="0" x2="0" y2="1">

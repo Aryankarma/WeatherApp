@@ -155,7 +155,7 @@ export default function Home() {
   const [aqiRangeValue, updateAqiRangeValue] = useState(0);
   const [sunriseTime, setSunriseTime] = useState("")
   const [sunsetTime, setSunsetTime] = useState("")
-  const [tempValue, setTempValue] = useState(0)
+  // const [tempValue, setTempValue] = useState(0)
   const [conditionValue, setConditionValue] = useState("")
   const [minTempValue, setminTempValue] = useState(0)
   const [maxTempValue, setmaxTempValue] = useState(0)
@@ -328,8 +328,8 @@ export default function Home() {
       setSunriseTime(sunrise.toLowerCase())
       
       const currentCelciusTemp = forecastDataFinal.current.temp_c
-      setTempValue(Math.round(currentCelciusTemp))
-      // setTempAnimation(Math.round(currentCelciusTemp))
+      // setTempValue(Math.round(currentCelciusTemp))
+      setTempAnimation(Math.round(currentCelciusTemp))
       setConditionValue(forecastDataFinal.current.condition.text)
       setminTempValue(Math.round(forecastDataFinal.forecast.forecastday[0].day.mintemp_c))
       setmaxTempValue(Math.round(forecastDataFinal.forecast.forecastday[0].day.maxtemp_c))
@@ -371,29 +371,29 @@ export default function Home() {
       fetchWeather(api, city);
     }else{
       fetchWeather(api, "New delhi");
-      console.log("permission rejecteded")
+      // console.log("permission rejecteded")
     }
   },[effect])
 
 
 
-  // function setTempAnimation(tempValue){
-  //   var logEl = document.querySelector('#tempratureAnimation');
+  function setTempAnimation(tempValue){
+    var logEl = document.querySelector('#tempratureAnimation');
 
-  //   var battery = {
-  //     cycles: 0
-  //   }
+    var battery = {
+      cycles: 0
+    }
 
-  //   anime({
-  //     targets: battery,
-  //     cycles: tempValue,
-  //     round: 1,
-  //     easing: 'easeInOutQuad',
-  //     update: function() {
-  //       logEl.innerHTML = JSON.stringify(battery.cycles);
-  //     }
-  //   });
-  // }
+    anime({
+      targets: battery,
+      cycles: tempValue,
+      round: 1,
+      easing: 'easeInOutQuad',
+      update: function() {
+        logEl.innerHTML = JSON.stringify(battery.cycles);
+      }
+    });
+  }
   
   function rotateSun(rotateValue){
     anime({
@@ -405,21 +405,40 @@ export default function Home() {
     })
   }
 
+  const fadeInAnimation = () =>{
+    console.log("function is working")
+    anime({
+      targets: '.addFadeIn',
+      opacity: [0, 1],
+      easing: 'easeInOutQuad'
+    });
+  }
+
+  const animationFix = () => {
+    console.log("working")
+    document.querySelector("#searchBoxDiv").style.outline = "none"; 
+  }
+
   return ( <>
-    <div className={styles.homeContainer}>
+    <div onLoad={fadeInAnimation} id="addFadeIn" className={styles.homeContainer}>
 
       <div className={styles.header}>
 
         {/* <Greeting hour={hour}/> */}
 
           <form action="" onSubmit={(e) => formSubmit(e)}>
+          <div id="searchBoxDiv" className={styles.searchBoxDiv}>
+            <img src="images/svgs/searchLogo.svg" alt="" />
             <input
               autoFocus="true"
               className={styles.searchBox}
               type="text"
               placeholder="Enter city"
               name="city"
-              />
+              onFocus={animationFix}
+            />
+            </div>
+
             <button className={styles.searchButton} type="submit">
               Search
             </button>
@@ -437,8 +456,8 @@ export default function Home() {
         <img className={styles.conditionImg} src="images/weatherCondition/cloudStrike.png" alt="" />          
         
         <div id={styles.tempCondition}>
-          <span id="tempratureAnimation" className={styles.temp}>{tempValue}<sup id={styles.degreeUnit}>°C</sup></span>
-          {/* <span id="tempratureAnimation" className={styles.temp}>0<sup id={styles.degreeUnit}>°C</sup></span> */}
+     {/* <span id="tempratureAnimation" className={styles.temp}>{tempValue}<sup id={styles.degreeUnit}>°C</sup></span>*/}     
+          <span id="tempratureAnimation" className={styles.temp}>0<sup id={styles.degreeUnit}>°C</sup></span>
           <br/>
           {/* <span id={styles.degreeUnit}>°C</span> */}
           <span id={styles.condition}>{conditionValue}, {minTempValue}°/{maxTempValue}°</span>

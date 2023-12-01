@@ -1,12 +1,12 @@
 .aqiContainer{
-    width: 500px;
+    width: 425px;
 }
 .aqiRange{
     accent-color: black;
     -webkit-appearance: none;
     margin: 1rem 0;
-    width: 500px;
-    height: 5px;
+    width: 100%;
+    height: 4px;
     border-radius: 5px;
     background-image: linear-gradient(90deg, #B3AEF5 0%, rgba(238, 85, 153, 0.62) 30.73%, #FF7878 57.29%, #FF3200 74.48%, #FA9D5A 100%);
     position: relative;
@@ -25,12 +25,13 @@
 .headContainer{
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 8px;
 }
 .aqiHeading{
-    font-size: 30px;
+    font-size: 24px;
 }
 .aqiStatement{
     color: #aaa;
     font-weight: 300;
+    font-size: 13px;
 }
