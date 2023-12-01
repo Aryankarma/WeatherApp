@@ -220,11 +220,11 @@ export default function Home() {
     const month = today.getMonth() + 1;
     const date = today.getDate();
     const day = today.getDay();
+    var threeDaysEarlier = new Date(today);
+    threeDaysEarlier.setDate(today.getDate() - 3);
 
-    const startDate = year + "-" + month + "-" + (date-4);
-    const endDate = year + "-" + month + "-" + (date-1);
-
-    // console.log(day)
+    const apiStartDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+    const apiEndDate = threeDaysEarlier.getFullYear() + "-" + (threeDaysEarlier.getMonth() + 1) + "-" + threeDaysEarlier.getDate();
 
     const urlHistory = 
     "https://api.weatherapi.com/v1/history.json?key="
@@ -232,12 +232,12 @@ export default function Home() {
     "&q="+ 
     city + 
     "&dt=" + 
-    startDate + 
+    apiStartDate+ 
     "&end_dt=" + 
-    endDate;
+    apiEndDate;
+
 
     try {
-
       const forecastData = await fetch(urlForecast);
       const forecastDataFinal = await forecastData.json();
 
