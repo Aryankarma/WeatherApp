@@ -1,11 +1,21 @@
 .homeContainer{
     display: flex;
     justify-content: space-between;
-    flex-direction: column;   
+    flex-direction: column;    
     width: 100%;
-    height: 95%;
+    height: 92%;
     align-items: center;
+    animation: opacity 1s ease-in-out;
 }
+ 
+@keyframes opacity{
+    0%{
+        opacity:0;
+    }100%{
+        opacity:1;
+    }
+}
+
 .header{
     /* margin-bottom: 2rem; */
     width: 90%;
@@ -14,14 +24,14 @@
     align-items: center;
     justify-content: center;
 }
-.topContent, .bottomContent{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 90%;
-    align-items: center;
-}
+.topContent, .bottomContent{                    
+    display: flex;                  
+    flex-direction: row;                    
+    justify-content: space-evenly;                  
+    align-items: center;                    
+    width: 90%;                 
+    align-items: center;                    
+}                   
 /* .bottomContent{
     display: flex;
     flex-direction: row;
@@ -144,7 +154,7 @@
     height: fit-content;
     position: relative;
 }
-.weatherGraph{    
+.weatherGraph{
     justify-content: space-between;
     /* height: 350px; */
     align-items: center;
@@ -173,8 +183,8 @@
     color: #ffffff;
 }
 #location1{
-    line-height: 3rem;
-    width: fit-content;
+    /* line-height: 3rem; */
+    width: 90%;
     bottom:0;
     font-size: 24px;
     font-weight: 300;
@@ -188,7 +198,7 @@
 }
 #degreeUnit{
     font-weight: 400;
-    top: -7rem;
+    top: -6rem;
     left: -1rem;
     color: white;
     font-size: 32px;
@@ -199,8 +209,9 @@
     right:0;
     transform: translate(30%,-25%);
     z-index: 10;
-    width: 200px;
+    width: 250px;
 }
+
 .weatherDetailContainer{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -242,6 +253,7 @@
     flex-direction: row;
     align-items: center;
 }
+
 .searchBox:hover{
     outline: 1px solid #555;
     transition: all .35s ease;
@@ -260,6 +272,7 @@
 }
 
 
+
 /* Media Queries */
  
 /* Small smartphones (iPhone 4, Galaxy S2, etc.) */
@@ -272,7 +285,7 @@
 /* Medium smartphones (iPhone 5, Galaxy S3, etc.) */
 @media only screen and (min-width : 640px){
     
-
+    
 
 }
 
@@ -291,27 +304,53 @@
 }
 
 
-/* Medium tablets (iPad 2, Galaxy Tab 10.1, etc.) */
-@media only screen and (min-width : 1024px){
-
-    .homeContainer{
-        /* width: 95%; */
-        /* background-color: green; */
+@media only screen and (min-width : 1000px) and (max-width: 1100px){
+    .weatherDetailContainer{
+        transform: scale(.85);
     }
+    .bottomLeftContainer{
+        transform: scale(.87);
+    }
+    .mainWeather {
+        transform: scale(.87)
+    }
+    .weatherGraph{
+        transform: scale(.87);
+    }
+    .homeContainer{         
+        transform: scale(.87);
+        gap: 2rem;
+        height: 103vh;
+    }
+    .topContent,.bottomContent{
+        gap: 1.5rem;
+    }
+    .searchBox{
+        padding: 8px 25px;
+    }
+}
 
+/* Medium tablets (iPad 2, Galaxy Tab 10.1, etc.) */
+@media only screen and (min-width : 1100px) and (max-width: 1200px){
+    .homeContainer{       
+        transform: scale(.9);
+        gap: 2.5rem;
+    }
+    .topContent,.bottomContent{
+        width: 100%;
+    }
     .searchBox{
         padding: 8px 25px;
     }
 }
 
 
+
 /* Large tablets and small laptops (MacBook Air 11", etc.) 75%-80% */
 @media only screen and (min-width : 1200px){
-    
-    .homeContainer{
-        /* background: red; */
+    .searchBox{
+        padding: 10px 30px;
     }
-
 }
  
 

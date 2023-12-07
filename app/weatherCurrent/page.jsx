@@ -184,7 +184,6 @@ export default function Home() {
     e.preventDefault();
     const rawData = new FormData(e.currentTarget);
     const dataInput = rawData.get("city");
-    // console.log(dataInput);
     fetchWeather(api, dataInput);
   };
 
@@ -223,8 +222,8 @@ export default function Home() {
     var threeDaysEarlier = new Date(today);
     threeDaysEarlier.setDate(today.getDate() - 3);
 
-    const apiStartDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-    const apiEndDate = threeDaysEarlier.getFullYear() + "-" + (threeDaysEarlier.getMonth() + 1) + "-" + threeDaysEarlier.getDate();
+    const apiStartDate = threeDaysEarlier.getFullYear() + "-" + (threeDaysEarlier.getMonth() + 1) + "-" + threeDaysEarlier.getDate();
+    const apiEndDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
     const urlHistory = 
     "https://api.weatherapi.com/v1/history.json?key="
@@ -235,7 +234,6 @@ export default function Home() {
     apiStartDate+ 
     "&end_dt=" + 
     apiEndDate;
-
 
     try {
       const forecastData = await fetch(urlForecast);
@@ -252,18 +250,16 @@ export default function Home() {
       //   console.log("Error exists")
       // }
 
-      console.log(forecastDataFinal)
-      console.log(historyDataFinal)
-      console.log(astroDataFinal);
+      // console.log(forecastDataFinal)
+      // console.log(historyDataFinal)
+      // console.log(astroDataFinal);
 
       // graph data (single)
       const forecastDayData = forecastDataFinal.forecast.forecastday[0].hour
       const forecastHourData = forecastDayData.map((input)=>{
         return input.temp_c
       })
-      
-      // console.log(forecastHourData)
-      
+
       singleGraphData.forEach((input, index)=>{
         input.value = forecastHourData[index];  
       })
@@ -275,28 +271,26 @@ export default function Home() {
       const tempMax = [];
       const tempMin = [];
       
-      historyDataFinal.forecast.forecastday.map((input, index)=>{
 
-        tempMax[index] = input.day.maxtemp_c;
-        tempMin[index] = input.day.mintemp_c;
-        // console.log(input.date, input.day.maxtemp_c) // get maxtemp from prev 4 days
-        // console.log(input.date, input.day.mintemp_c) // get mintemp from prev 4 days
+      historyDataFinal.forecast.forecastday.map((input, index)=>{
+        tempMax[index] = input.day.maxtemp_c; // get maxtemp of previous 3 days
+        tempMin[index] = input.day.mintemp_c; // get mintemp of previous 3 days
       })
       
-
       const lengthMax = tempMax.length;
       const lengthMin = tempMin.length;
 
       forecastDataFinal.forecast.forecastday.map((input, index)=>{
-
-        tempMax[lengthMax + index] = input.day.maxtemp_c;
-        tempMin[lengthMin + index] = input.day.mintemp_c;
-        // console.log(input.date, input.day.maxtemp_c) // get maxtemp of current+2 days
-        // console.log(input.date, input.day.mintemp_c) // get mintemp of current+2 days
+        tempMax[lengthMax + index] = input.day.maxtemp_c; // get maxtemp of current+2 days
+        tempMin[lengthMin + index] = input.day.mintemp_c; // get mintemp of current+2 days
       })
       
+      // console.log(doubleGraphData)
+
       // setting doubleGraphData data
       doubleGraphData.forEach((input, index)=>{
+        // console.log(input.high, index)
+        // console.log(input.low, index)
         input.high = tempMax[index]
         input.low = tempMin[index]
       })
@@ -406,7 +400,7 @@ export default function Home() {
   }
 
   const fadeInAnimation = () =>{
-    console.log("function is working")
+    // console.log("function is working")
     anime({
       targets: '.addFadeIn',
       opacity: [0, 1],
@@ -415,9 +409,216 @@ export default function Home() {
   }
 
   const animationFix = () => {
-    console.log("working")
+    // console.log("working")
     document.querySelector("#searchBoxDiv").style.outline = "none"; 
   }
+
+  let weatherConditionImg = "";
+
+  const lightrain = "images/weatherCondition3d/lightrain.png"
+  const cloudy = "images/weatherCondition3d/cloudy.png"
+  const snow = "images/weatherCondition3d/snow.png"
+  const sunnyfoggy = "images/weatherCondition3d/sunnyfoggy.png"
+  const thunder = "images/weatherCondition3d/thunder.png"
+  const windy = "images/weatherCondition3d/windy.png"
+  const windycloudynight = "images/weatherCondition3d/windycloudynight.png"
+  const windynight = "images/weatherCondition3d/windynight.png"
+
+  const setWeatherConditionPath = () => {
+
+    anime({
+      targets: '#conditionImg',
+      opacity: [0.3, 1],
+      easing: 'easeInOutQuad'
+    });
+
+    switch (conditionValue) {
+      
+      case "Patchy rain possible" :
+        weatherConditionImg = lightrain
+      break;
+      
+      case "Patchy light rain" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Light rain" :
+        weatherConditionImg = lightrain
+      break;
+      
+      case "Moderate rain at times" :
+        weatherConditionImg = lightrain
+      break;
+      
+      case "Moderate rain" :
+        weatherConditionImg = lightrain
+      break;
+      
+      case "Heavy rain at times" :
+        weatherConditionImg = lightrain
+      break;
+      
+      case "Heavy rain" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Light freezing rain" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Light drizzle" : 
+        weatherConditionImg = lightrain
+      break;
+
+      case "Moderate or heavy freezing rain" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Patchy light drizzle" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Light showers of ice pellets":
+        weatherConditionImg = lightrain
+      break;
+
+      case "Light rain shower" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Moderate or heavy rain shower" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Torrential rain shower" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Patchy light rain with thunder" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Moderate or heavy rain with thunder" :
+        weatherConditionImg = lightrain
+      break;
+
+      case "Sunny" :
+        weatherConditionImg = sunnyfoggy
+      break;
+
+      case "Mist" :
+        weatherConditionImg = cloudy
+      break;
+
+      case "Fog" :
+        weatherConditionImg = sunnyfoggy
+      break;
+
+      case "Freezing fog" :
+        weatherConditionImg = sunnyfoggy
+      break;
+
+      case "Thundery outbreaks possible" :
+        weatherConditionImg = thunder
+      break;
+
+      // case 2
+      case "Patchy light rain with thunder" :
+        weatherConditionImg = thunder
+      break;
+
+      // case 2
+      case "Moderate or heavy rain with thunder" :
+        weatherConditionImg = thunder
+      break;
+
+      // repeating
+      case "Patchy light snow with thunder" :
+        weatherConditionImg = thunder
+      break;
+
+      case "Moderate or heavy snow with thunder" :
+        weatherConditionImg = thunder
+      break;
+
+      case "Blowing snow" :
+        weatherConditionImg = windy
+      break;
+
+      case "Blizzard" :
+        weatherConditionImg = windy
+      break;
+
+      case "Windy" :
+        weatherConditionImg = windy
+      break;
+
+      case "Cloudy" :
+        weatherConditionImg = cloudy
+      break;
+
+      case "Overcast" :
+        weatherConditionImg = windycloudynight
+      break;
+
+      case "Moderate or heavy rain shower" :
+        weatherConditionImg = windycloudynight
+      break;
+
+      case "Torrential rain shower" :
+        weatherConditionImg = windycloudynight
+      break;
+
+      case "Moderate or heavy sleet showers" :
+        weatherConditionImg = windycloudynight
+      break;
+
+      case "Moderate or heavy snow showers" :
+        weatherConditionImg = windycloudynight
+      break;
+
+      case "Patchy snow possible" :
+        weatherConditionImg = snow
+      break;
+
+      case "Light snow" :
+        weatherConditionImg = snow
+      break;
+
+      case "Patchy moderate snow" :
+        weatherConditionImg = snow
+      break;
+
+      case "Moderate snow" :
+        weatherConditionImg = snow
+      break;
+
+      case "Patchy heavy snow" :
+        weatherConditionImg = snow
+      break;
+
+      case "Heavy snow" :
+        weatherConditionImg = snow
+      break;
+
+      case "Ice pellets" :
+        weatherConditionImg = snow
+      break;
+
+      case "Light sleet showers" :
+        weatherConditionImg = snow
+      break;
+
+      case "Moderate or heavy sleet showers" :
+        weatherConditionImg = snow
+      break;
+
+      default: weatherConditionImg = cloudy
+        break;
+    }
+  } 
+
+  setWeatherConditionPath();
 
   return ( <>
     <div onLoad={fadeInAnimation} id="addFadeIn" className={styles.homeContainer}>
@@ -453,7 +654,8 @@ export default function Home() {
 
       <div className={styles.mainWeather}>
         <img className={styles.bgImage} src="images/bgMain.png" alt="" />
-        <img className={styles.conditionImg} src="images/weatherCondition/cloudStrike.png" alt="" />          
+        <img id="conditionImg" className={styles.conditionImg} src={weatherConditionImg} alt="" />          
+        {/* <img className={styles.conditionImg} src="images/weatherCondition3d/snow.png" alt="" />           */}
         
         <div id={styles.tempCondition}>
      {/* <span id="tempratureAnimation" className={styles.temp}>{tempValue}<sup id={styles.degreeUnit}>°C</sup></span>*/}     

@@ -22,5 +22,6 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  /* overflow: hidden; */
+  /* comment overflow for while designing responsiveness */
+  overflow: hidden;
 }

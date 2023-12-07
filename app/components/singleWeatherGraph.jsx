@@ -1,11 +1,12 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import "../components/trycss.css"
 
 const tooltipStyles = {
   borderRadius: "10px",
   backgroundColor: "#050505",
   padding: "0.75rem",
   boxShadow: "5px 5px 10px #111",
-  fontWeight: 600
+  fontWeight: 600,
 }
 
 const graphName = {
@@ -13,6 +14,7 @@ const graphName = {
   top: "7.5px",
   zIndex : "2"
 }
+
 
 export default function Graph({data}) {
   

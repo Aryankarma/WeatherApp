@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { AreaChart, wrapperStyle, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import "../components/trycss.css"
 
 const tooltipStyles = {
   borderRadius: "10px",
@@ -8,7 +9,6 @@ const tooltipStyles = {
   boxShadow: "5px 5px 10px #111",
   fontWeight: 600
 }
-
 
 const graphName = {
   position: "absolute",
@@ -21,7 +21,20 @@ export default function Graph({data}){
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const style = document.createElement('style');
-      style.innerHTML = '.recharts-surface { border-radius: 17.5px; }'; 
+      style.innerHTML = '.recharts-surface { border-radius: 17.5px; }';
+      document.head.appendChild(style);
+    }
+    if( window.innerWidth > 1000 && 1100 > window.innerWidth){
+      const style2 = document.createElement('style'); // for graph 
+      const style3 = document.createElement('style'); // for graph wrapper
+      style2.innerHTML = '.recharts-surface { width: 490px }';
+      style3.innerHTML = '.recharts-wrapper { width: 490px !important }';
+      document.head.appendChild(style2);
+      document.head.appendChild(style3);
+
+      // increasing border radius
+      const style = document.createElement('style');
+      style.innerHTML = '.recharts-surface { border-radius: 25px; }';
       document.head.appendChild(style);
     }
   }, []);
@@ -82,7 +95,7 @@ export default function Graph({data}){
     <span style={graphName}>7D forecast</span>
   <AreaChart key={key} width={600} height={105} data={data}
     margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>
-    <defs>        
+    <defs>
       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
         <stop stopColor="#1C1310" stopOpacity={1} />
       </linearGradient>
