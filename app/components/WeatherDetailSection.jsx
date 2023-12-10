@@ -1,6 +1,7 @@
+import { memo } from "react";
 import styles from "../components/WeatherDetail.module.css";
 
-export default function WeatherDetails({heading, logo, sub, value}){
+const WeatherDetails = ({heading, logo, sub, value}) => {
     return <div className={styles.detailBox}>
         <div className={styles.detailName}>
             <img src={logo} alt="" />
@@ -11,3 +12,5 @@ export default function WeatherDetails({heading, logo, sub, value}){
         </div>
     </div>
 }
+
+export default memo(WeatherDetails);

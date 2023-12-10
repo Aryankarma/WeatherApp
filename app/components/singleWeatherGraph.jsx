@@ -1,5 +1,6 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import "../components/trycss.css"
+import { memo } from 'react';
 
 const tooltipStyles = {
   borderRadius: "10px",
@@ -16,8 +17,8 @@ const graphName = {
 }
 
 
-export default function Graph({data}) {
-  
+const Graph = ({data}) => {
+
   function createUniqueKey() {
     const oldkey = Math.floor(Math.random()*100)
     return oldkey;    
@@ -134,3 +135,5 @@ export default function Graph({data}) {
     </AreaChart>
   </div>
 }  
+
+export default Graph;

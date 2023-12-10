@@ -1,6 +1,7 @@
+import { memo } from "react";
 import styles from "../components/aqirange.module.css"
 
-export default function AqiRange({range}){
+const AqiRange = ({range}) => {
     let airHealth = "";
     let statement = "";
     range = Math.floor(range)
@@ -55,7 +56,7 @@ export default function AqiRange({range}){
     </div>
 }
 
-
+export default memo(AqiRange);
 
 /*
       AQI = (PM2.5 - BPLo) / (BPhi - BPLo) * (IHi - ILo) + ILo

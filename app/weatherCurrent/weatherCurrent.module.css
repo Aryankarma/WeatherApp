@@ -209,9 +209,9 @@
     right:0;
     transform: translate(30%,-25%);
     z-index: 10;
-    width: 250px;
+    width: 225px;
+    filter:drop-shadow(0 0 10px #222);
 }
-
 .weatherDetailContainer{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -238,7 +238,7 @@
     background-color: #181818;
     color: #eee;
     font-weight: 200;
-    letter-spacing: 1.5px;
+    letter-spacing: .5px;
     transition: .35s;
     outline: 1px solid transparent;
 }
@@ -271,6 +271,11 @@
     display: none;
 }
 
+.behindInput{
+    position: absolute;
+    top: 100%;
+    z-index:10;
+}
 
 
 /* Media Queries */

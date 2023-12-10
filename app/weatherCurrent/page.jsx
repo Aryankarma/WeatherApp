@@ -10,10 +10,12 @@ import AqiRange from "../components/aqiRange"
 // import WeatherGraphContainer from "../components/WeatherGraphContainer"
 import DoubleWeatherGraph from "../components/doubleWeatherGraph"
 import SingleWeatherGraph from "../components/singleWeatherGraph"
+import CityNames from '../components/cityNames'
 import Greeting from "../components/Greeting";
 import Lottie from 'react-lottie'
 import AnimatedLogo from "../components/animatesLogo" 
 import animationData from "../../public/images/json/logo.json"
+
 
 // const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
 //   ssr: false,
@@ -150,9 +152,9 @@ const time = [ "1", "2", "3", "4", "5", "6", "7",
 export default function Home() {
       
   // useState hooks
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(null);
-  const [aqiRangeValue, updateAqiRangeValue] = useState(0);
+  const [latitude, setLatitude] = useState(0)
+  const [longitude, setLongitude] = useState(null)
+  const [aqiRangeValue, updateAqiRangeValue] = useState(0)
   const [sunriseTime, setSunriseTime] = useState("")
   const [sunsetTime, setSunsetTime] = useState("")
   // const [tempValue, setTempValue] = useState(0)
@@ -164,6 +166,7 @@ export default function Home() {
   const [doubleGraphDataValue, setdoubleGraphDataValue] = useState([])
   const [effect, executeEffect] = useState(0)
   const [hour, setHour] = useState(0)
+  const [cityName, setCityName] = useState([])
 
   // geolocation api
   useEffect(() => {
@@ -181,7 +184,9 @@ export default function Home() {
   const api = "24951e153ffc4135aeb175518231307";
 
   const formSubmit = (e) => {
+    // console.log("formSubmit is executing")
     e.preventDefault();
+    setCityName([])
     const rawData = new FormData(e.currentTarget);
     const dataInput = rawData.get("city");
     fetchWeather(api, dataInput);
@@ -558,7 +563,7 @@ export default function Home() {
       break;
 
       case "Overcast" :
-        weatherConditionImg = windycloudynight
+        weatherConditionImg = cloudy
       break;
 
       case "Moderate or heavy rain shower" :
@@ -620,14 +625,75 @@ export default function Home() {
 
   setWeatherConditionPath();
 
-  return ( <>
+
+  // for debouncing input
+
+  const [term, setTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
+
+  const printThis = (e) => {
+    setTerm(e);
+  }
+
+  // debouncing
+  useEffect(()=>{
+
+    // check if the input contains only spaces
+    if(term == !/\S/){
+      return setCityName([])
+    }
+
+    const oneSec = setTimeout(() => {
+        setSearchTerm(term)
+    }, 500);
+  
+    // Clean up the timer if the user continues typing
+    return () => {
+      clearTimeout(oneSec);
+    };
+  }, [term]);
+
+  // logic to fetch city data
+  useEffect(()=>{
+
+    const fetchCityData = async () =>{
+      const cityURL = "https://api.teleport.org/api/cities/?search=" + term;
+
+      try{
+        const rawData = await fetch(cityURL);
+      const citydata = await rawData.json();
+        let count = 0;
+      const tempCityName = [];
+      
+      for (let i = 0; i < 5; i++) {
+        if (citydata?._embedded["city:search-results"][i]?.matching_full_name) {
+          count++;
+        }
+      }
+        for (let i = 0; i < count; i++) {
+        tempCityName.push(citydata?._embedded["city:search-results"][i]?.matching_full_name);
+      }
+        setCityName(tempCityName);
+      }catch(error){
+      console.log(error);
+    }
+  } 
+
+  if (searchTerm !== '') {
+    fetchCityData();
+  }
+
+  },[searchTerm])
+
+
+    return ( <>
     <div onLoad={fadeInAnimation} id="addFadeIn" className={styles.homeContainer}>
 
       <div className={styles.header}>
 
         {/* <Greeting hour={hour}/> */}
 
-          <form action="" onSubmit={(e) => formSubmit(e)}>
+        <form action="" onSubmit={(e) => formSubmit(e)}>
           <div id="searchBoxDiv" className={styles.searchBoxDiv}>
             <img src="images/svgs/searchLogo.svg" alt="" />
             <input
@@ -637,13 +703,28 @@ export default function Home() {
               placeholder="Enter city"
               name="city"
               onFocus={animationFix}
+              autocomplete="off"
+              onChange={(e) => printThis(e.target.value)}
             />
-            </div>
+            
+            <ul className={styles.behindInput} >
+              
+              <CityNames cityName={cityName} />
 
-            <button className={styles.searchButton} type="submit">
-              Search
-            </button>
-          </form>
+              {/* {cityNames.map((suggestion, index) => (
+                <li key={index} >
+                  <button tpe="submit"> {suggestion} </button> 
+                </li>
+              ))} */}
+           
+            </ul>
+
+          </div>
+
+          <button className={styles.searchButton} type="submit">
+            Search
+          </button>
+        </form>
 
           {/* <img className={styles.img1} src="images/svgs/location.svg" alt="locationLogo" />
           <img className={styles.img2} src="images/svgs/setting.svg" alt="settingLogo" /> */}
@@ -654,7 +735,7 @@ export default function Home() {
 
       <div className={styles.mainWeather}>
         <img className={styles.bgImage} src="images/bgMain.png" alt="" />
-        <img id="conditionImg" className={styles.conditionImg} src={weatherConditionImg} alt="" />          
+        <img loading="lazy" id="conditionImg" className={styles.conditionImg} src={weatherConditionImg} alt="" />          
         {/* <img className={styles.conditionImg} src="images/weatherCondition3d/snow.png" alt="" />           */}
         
         <div id={styles.tempCondition}>
@@ -697,7 +778,7 @@ export default function Home() {
          <div className={styles.item}></div>
         </div>
 
-        <img className={styles.img} src="images/Ellipsefinal.png" alt="sunLine" />
+        <img loading="lazy" className={styles.img} src="images/Ellipsefinal.png" alt="sunLine" />
         
         <div className={styles.blackShade}>
           <div className={styles.timings}>
