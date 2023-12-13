@@ -24,19 +24,19 @@ export default function Graph({data}){
       style.innerHTML = '.recharts-surface { border-radius: 17.5px; }';
       document.head.appendChild(style);
     }
-    if( window.innerWidth > 1000 && 1100 > window.innerWidth){
-      const style2 = document.createElement('style'); // for graph 
-      const style3 = document.createElement('style'); // for graph wrapper
-      style2.innerHTML = '.recharts-surface { width: 490px }';
-      style3.innerHTML = '.recharts-wrapper { width: 490px !important }';
-      document.head.appendChild(style2);
-      document.head.appendChild(style3);
+    // if( window.innerWidth > 1000 && 1100 > window.innerWidth){
+    //   const style2 = document.createElement('style'); // for graph 
+    //   const style3 = document.createElement('style'); // for graph wrapper
+    //   style2.innerHTML = '.recharts-surface { width: 490px }';
+    //   style3.innerHTML = '.recharts-wrapper { width: 490px !important }';
+    //   document.head.appendChild(style2);
+    //   document.head.appendChild(style3);
 
-      // increasing border radius
-      const style = document.createElement('style');
-      style.innerHTML = '.recharts-surface { border-radius: 25px; }';
-      document.head.appendChild(style);
-    }
+    //   // increasing border radius
+    //   const style = document.createElement('style');
+    //   style.innerHTML = '.recharts-surface { border-radius: 25px; }';
+    //   document.head.appendChild(style);
+    // }
   }, []);
 
   function createUniqueKey() {
@@ -59,25 +59,25 @@ export default function Graph({data}){
 
     switch (input.label) {
       case 0:
-        day = "Monday"
-      break;
-      case 1:
-        day = "Tuesday"
-      break;
-      case 2:
-        day = "Wednesday"
-      break;
-      case 3:
-        day = "Thursday"
-      break;
-      case 4:
-        day = "Friday"
-      break;
-      case 5:
-        day = "Saturday"
-      break;
-      case 6:
-        day = "Sunday"
+        day = "Monday"              
+      break;              
+      case 1:             
+        day = "Tuesday"             
+      break;              
+      case 2:             
+        day = "Wednesday"             
+      break;              
+      case 3:             
+        day = "Thursday"              
+      break;              
+      case 4:             
+        day = "Friday"              
+      break;              
+      case 5:             
+        day = "Saturday"              
+      break;              
+      case 6:             
+        day = "Sunday"              
       break;
       default:
         break;

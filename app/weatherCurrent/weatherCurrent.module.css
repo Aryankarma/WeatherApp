@@ -6,6 +6,7 @@
     height: 92%;
     align-items: center;
     animation: opacity 1s ease-in-out;
+    transition: .35s;
 }
  
 @keyframes opacity{
@@ -44,6 +45,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: .35s;
 }
 
 /* css for new sunrise animation */
@@ -153,6 +155,7 @@
     background-repeat: no-repeat; 
     height: fit-content;
     position: relative;
+    transition: .35s;
 }
 .weatherGraph{
     justify-content: space-between;
@@ -161,6 +164,7 @@
     gap:1rem;
     display: flex;
     flex-direction: column;
+    transition: .35s;
 }
 #tempCondition{
     position: absolute;
@@ -208,7 +212,7 @@
     top:0;
     right:0;
     transform: translate(30%,-25%);
-    z-index: 10;
+    z-index: 9;
     width: 225px;
     filter:drop-shadow(0 0 10px #222);
 }
@@ -220,6 +224,7 @@
     grid-column-gap: 7.5%;
     justify-content: center;
     width: 600px;
+    transition: .35s;
 }
 .tagLine{
     position: absolute;
@@ -275,6 +280,25 @@
     position: absolute;
     top: 100%;
     z-index:10;
+    margin: .75rem 0;
+    width: 100%;
+    border-radius: 1rem;
+    background-color: #151515;
+
+}
+
+.behindInput li{
+    padding: 7.5px 15px;
+    background-color: #151515;
+    margin: 0;
+    border: 0;
+    border-radius: 20px;
+
+}
+
+.behindInput li:hover{
+    background-color: #252525;
+    cursor: pointer;
 }
 
 
@@ -294,10 +318,53 @@
 
 }
 
+/* small tablets */
+@media only screen and (max-width: 820px){
+    
+/* 
+    homecontainer
+    gap 2 rem
 
-/* Large smartphones and small tablets (iPad mini, Nexus 7, etc.) */
-@media only screen and (min-width : 768px){
-    .img1{
+    topcontent & bottomcontent
+    gap: 0;
+
+    bgimage
+    375x275;
+
+    conditionImg
+    width: 200px;
+
+    tempcondition
+    top: 17.5%;
+    left: 5%
+
+    temp
+    font-size: 125px;
+
+    condition & location1:
+    font-size: 20px;
+
+    weathergraph
+    transform: scale(.7);
+
+    bottomleftcontainer
+    transform: scale(.9);
+ */
+
+ 
+    .bottomleftcontainer{
+        transform: scale(.9);
+    }
+    .topContent,.bottomContent{
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+
+/* Large smartphones and tablets (iPad mini, Nexus 7, etc.) */
+@media only screen and (min-width : 820px) and (max-width: 1000px){
+    /* .img1{
         height: 30px;
     }    
     .img2{
@@ -305,12 +372,21 @@
     }
     .searchBox{
         padding: 2px 10px;
+    } */
+    .homeContainer{       
+        transform: scale(.75);
+        gap: 2.5rem;
+        width: unset;
+        height: 120%;
+    }
+    .topContent,.bottomContent{
+        width: 120%;
     }
 }
 
 
 @media only screen and (min-width : 1000px) and (max-width: 1100px){
-    .weatherDetailContainer{
+    /* .weatherDetailContainer{
         transform: scale(.85);
     }
     .bottomLeftContainer{
@@ -332,7 +408,18 @@
     }
     .searchBox{
         padding: 8px 25px;
+    } */
+
+    .homeContainer{       
+        transform: scale(.8);
+        gap: 2.5rem;
+        width: unset;
+        height: 110%;
     }
+    .topContent,.bottomContent{
+        width: 110%;
+    }
+
 }
 
 /* Medium tablets (iPad 2, Galaxy Tab 10.1, etc.) */
@@ -353,9 +440,13 @@
 
 /* Large tablets and small laptops (MacBook Air 11", etc.) 75%-80% */
 @media only screen and (min-width : 1200px){
-    .searchBox{
+    /* .searchBox{
         padding: 10px 30px;
     }
+    .homeContainer{       
+        transform: scale(.9);
+        gap: 2.5rem;
+    } */
 }
  
 

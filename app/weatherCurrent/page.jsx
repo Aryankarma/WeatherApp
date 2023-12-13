@@ -15,6 +15,8 @@ import Greeting from "../components/Greeting";
 import Lottie from 'react-lottie'
 import AnimatedLogo from "../components/animatesLogo" 
 import animationData from "../../public/images/json/logo.json"
+import {useRef} from 'react';
+
 
 
 // const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
@@ -645,7 +647,7 @@ export default function Home() {
 
     const oneSec = setTimeout(() => {
         setSearchTerm(term)
-    }, 500);
+    }, 350);
   
     // Clean up the timer if the user continues typing
     return () => {
@@ -661,9 +663,12 @@ export default function Home() {
 
       try{
         const rawData = await fetch(cityURL);
-      const citydata = await rawData.json();
+        const citydata = await rawData.json();
+        
+        console.log("Fetching data")
+
         let count = 0;
-      const tempCityName = [];
+        const tempCityName = [];
       
       for (let i = 0; i < 5; i++) {
         if (citydata?._embedded["city:search-results"][i]?.matching_full_name) {
@@ -685,6 +690,22 @@ export default function Home() {
 
   },[searchTerm])
 
+  // handle click from outside the search suggestions to clear search suggestion
+  // useEffect(() => {
+  //   const handleClick = () => {
+  //     console.log(term)
+  //     if(searchTerm === ''){
+  //       console.log("empty")
+  //     }
+  //     // setCityName([])
+  //   };
+ 
+  //   document.addEventListener('click', handleClick);
+ 
+  //   return () => {
+  //     document.removeEventListener('click', handleClick);
+  //   };
+  // }, []);
 
     return ( <>
     <div onLoad={fadeInAnimation} id="addFadeIn" className={styles.homeContainer}>
@@ -709,13 +730,13 @@ export default function Home() {
             
             <ul className={styles.behindInput} >
               
-              <CityNames cityName={cityName} />
+              {/* <CityNames cityName={cityName} /> */}
 
-              {/* {cityNames.map((suggestion, index) => (
+              {cityName.map((suggestion, index) => (
                 <li key={index} >
                   <button tpe="submit"> {suggestion} </button> 
                 </li>
-              ))} */}
+              ))}
            
             </ul>
 
