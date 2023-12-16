@@ -4,19 +4,12 @@ import { useState, useEffect } from "react";
 import styles from "./weatherCurrent.module.css";
 import anime from "animejs/lib/anime.es.js";
 import WeatherDetails from "../components/WeatherDetailSection";
-import dynamic from 'next/dynamic';
 import XAxis1 from "../components/xaxis";
 import AqiRange from "../components/aqiRange"
 // import WeatherGraphContainer from "../components/WeatherGraphContainer"
 import DoubleWeatherGraph from "../components/doubleWeatherGraph"
 import SingleWeatherGraph from "../components/singleWeatherGraph"
-import CityNames from '../components/cityNames'
-import Greeting from "../components/Greeting";
-import Lottie from 'react-lottie'
-import AnimatedLogo from "../components/animatesLogo" 
-import animationData from "../../public/images/json/logo.json"
-import {useRef} from 'react';
-
+import { Link } from 'react-scroll';
 
 
 // const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
@@ -187,7 +180,6 @@ export default function Home() {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    setCityName([])
     const rawData = new FormData(e.currentTarget);
     const dataInput = rawData.get("city");
     fetchWeather(api, dataInput);
@@ -195,7 +187,7 @@ export default function Home() {
 
   // fetch weather data
   const fetchWeather = async (api, city) => {
-
+    
     const urlCurrent =
       "https://api.weatherapi.com/v1/current.json?key=" +
       api +
@@ -355,6 +347,11 @@ export default function Home() {
       }
 
       rotateSun(degToRotate);
+
+      // clear city suggestions
+      setTimeout(()=>{
+        setCityName([])
+      }, 100)
 
       } catch (error) {
         if(error){
@@ -713,6 +710,57 @@ export default function Home() {
     document.getElementById("bottomContent").style.transition = "1000ms"
   }
 
+  // empty city suggestions on enter
+  useEffect(()=>{
+
+    const handleKeyPress = (event) => {
+      if (event.key === 'Enter') {
+
+        document.getElementById("topContent").style.opacity = 1
+        document.getElementById("bottomContent").style.opacity = 1
+      }
+    };
+
+    document.body.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      document.body.removeEventListener('keydown', handleKeyPress);
+    };  
+
+  }, [])
+
+  // smooth scrolling
+  useEffect(() => {
+    let isScrolling = false;
+
+    const handleScroll = (event) => {
+      if (!isScrolling) {
+        isScrolling = true;
+
+        const scrollY = window.scrollY;
+        const smoothScrollFactor = 0.6;
+        const smoothScrollPosition = scrollY + (event.deltaY * smoothScrollFactor);
+
+        window.scrollTo({
+          top: smoothScrollPosition,
+          behavior: 'smooth',
+        });
+
+        // Reset the scrolling flag after a short delay (adjust as needed)
+        setTimeout(() => {
+          isScrolling = false;
+        }, 200); // 200 milliseconds debounce time
+      }
+    };
+
+    window.addEventListener('wheel', handleScroll);
+
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, []); // Empty dependency array ensures that the effect runs once on mount
+
+
     return ( <>
     <div onLoad={fadeInAnimation} id="addFadeIn" className={styles.homeContainer}>
 
@@ -726,6 +774,7 @@ export default function Home() {
             id="searchBoxDiv" className={styles.searchBoxDiv}>
               <img src="images/svgs/searchLogo.svg" alt="" />
               <input
+                id="removeFocus"
                 className={styles.searchBox}
                 type="text"
                 placeholder="Enter city"
