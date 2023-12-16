@@ -276,7 +276,7 @@
     display: none;
 }
 
-.behindInput{
+.belowInput{
     position: absolute;
     top: 100%;
     z-index:10;
@@ -284,10 +284,18 @@
     width: 100%;
     border-radius: 1rem;
     background-color: #151515;
-
+    animation: showup 1s ease-in-out;
 }
 
-.behindInput li{
+@keyframes showup{
+    from{
+        height: 0;
+    }to{
+        height: 100%;
+    }
+}
+
+.belowInput li{
     padding: 7.5px 15px;
     background-color: #151515;
     margin: 0;
@@ -296,7 +304,7 @@
 
 }
 
-.behindInput li:hover{
+.belowInput li:hover{
     background-color: #252525;
     cursor: pointer;
 }
@@ -436,8 +444,6 @@
     }
 }
 
-
-
 /* Large tablets and small laptops (MacBook Air 11", etc.) 75%-80% */
 @media only screen and (min-width : 1200px){
     /* .searchBox{
@@ -448,7 +454,7 @@
         gap: 2.5rem;
     } */
 }
- 
+
 
 /* Large laptops and desktops (iMac 27", MacBook Pro 15", etc.) <=67% */
 @media only screen and (min-width : 1536px){

@@ -13,4 +13,4 @@ const WeatherDetails = ({heading, logo, sub, value}) => {
     </div>
 }
 
-export default memo(WeatherDetails);
+export default memo(WeatherDetails); 

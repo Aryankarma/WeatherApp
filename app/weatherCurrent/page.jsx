@@ -186,7 +186,6 @@ export default function Home() {
   const api = "24951e153ffc4135aeb175518231307";
 
   const formSubmit = (e) => {
-    // console.log("formSubmit is executing")
     e.preventDefault();
     setCityName([])
     const rawData = new FormData(e.currentTarget);
@@ -194,7 +193,7 @@ export default function Home() {
     fetchWeather(api, dataInput);
   };
 
-  // fetching api
+  // fetch weather data
   const fetchWeather = async (api, city) => {
 
     const urlCurrent =
@@ -655,7 +654,7 @@ export default function Home() {
     };
   }, [term]);
 
-  // logic to fetch city data
+  // logic to fetch city suggestions
   useEffect(()=>{
 
     const fetchCityData = async () =>{
@@ -665,7 +664,7 @@ export default function Home() {
         const rawData = await fetch(cityURL);
         const citydata = await rawData.json();
         
-        console.log("Fetching data")
+        // console.log("Fetching data")
 
         let count = 0;
         const tempCityName = [];
@@ -690,22 +689,29 @@ export default function Home() {
 
   },[searchTerm])
 
-  // handle click from outside the search suggestions to clear search suggestion
-  // useEffect(() => {
-  //   const handleClick = () => {
-  //     console.log(term)
-  //     if(searchTerm === ''){
-  //       console.log("empty")
-  //     }
-  //     // setCityName([])
-  //   };
- 
-  //   document.addEventListener('click', handleClick);
- 
-  //   return () => {
-  //     document.removeEventListener('click', handleClick);
-  //   };
-  // }, []);
+  function onBlurFunction(e){
+    e.preventDefault();
+
+    // reset suggestions (not working)
+    // setCityName([])
+
+   
+    // // opacity
+    document.getElementById("topContent").style.opacity = 1
+    document.getElementById("bottomContent").style.opacity = 1
+  }
+
+  function onFocusFunction(e){
+    e.preventDefault();
+
+    // opacity
+    document.getElementById("topContent").style.opacity = .5
+    document.getElementById("bottomContent").style.opacity = .5
+
+    // // transition
+    document.getElementById("topContent").style.transition = "1000ms"
+    document.getElementById("bottomContent").style.transition = "1000ms"
+  }
 
     return ( <>
     <div onLoad={fadeInAnimation} id="addFadeIn" className={styles.homeContainer}>
@@ -714,27 +720,28 @@ export default function Home() {
 
         {/* <Greeting hour={hour}/> */}
 
-        <form action="" onSubmit={(e) => formSubmit(e)}>
-          <div id="searchBoxDiv" className={styles.searchBoxDiv}>
-            <img src="images/svgs/searchLogo.svg" alt="" />
-            <input
-              autoFocus="true"
-              className={styles.searchBox}
-              type="text"
-              placeholder="Enter city"
-              name="city"
-              onFocus={animationFix}
-              autocomplete="off"
-              onChange={(e) => printThis(e.target.value)}
-            />
+        <form action="" id="runOnsubmit" onSubmit={(e) => formSubmit(e)}>
+          <div 
+            tabIndex={0} onBlur={onBlurFunction}
+            id="searchBoxDiv" className={styles.searchBoxDiv}>
+              <img src="images/svgs/searchLogo.svg" alt="" />
+              <input
+                className={styles.searchBox}
+                type="text"
+                placeholder="Enter city"
+                name="city"
+                onFocus={onFocusFunction}
+                autocomplete="off"
+                onChange={(e) => printThis(e.target.value)}
+              />
             
-            <ul className={styles.behindInput} >
+            <ul className={styles.belowInput} >
               
               {/* <CityNames cityName={cityName} /> */}
 
               {cityName.map((suggestion, index) => (
                 <li key={index} >
-                  <button tpe="submit"> {suggestion} </button> 
+                  <button type="submit" > {suggestion} </button>
                 </li>
               ))}
            
@@ -752,7 +759,7 @@ export default function Home() {
       </div>
 
 
-      <div className={styles.topContent}>
+      <div id="topContent" className={styles.topContent}>
 
       <div className={styles.mainWeather}>
         <img className={styles.bgImage} src="images/bgMain.png" alt="" />
@@ -787,7 +794,7 @@ export default function Home() {
  
     </div>
 
-    <div className={styles.bottomContent}>
+    <div id="bottomContent" className={styles.bottomContent}>
        
     <div className={styles.bottomLeftContainer}>
 
