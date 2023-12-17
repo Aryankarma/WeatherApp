@@ -351,7 +351,7 @@ export default function Home() {
       // clear city suggestions
       setTimeout(()=>{
         setCityName([])
-      }, 100)
+      }, 50)
 
       } catch (error) {
         if(error){
@@ -643,7 +643,7 @@ export default function Home() {
 
     const oneSec = setTimeout(() => {
         setSearchTerm(term)
-    }, 350);
+    }, 200);
   
     // Clean up the timer if the user continues typing
     return () => {
@@ -702,8 +702,8 @@ export default function Home() {
     e.preventDefault();
 
     // opacity
-    document.getElementById("topContent").style.opacity = .5
-    document.getElementById("bottomContent").style.opacity = .5
+    document.getElementById("topContent").style.opacity = .2
+    document.getElementById("bottomContent").style.opacity = .2
 
     // // transition
     document.getElementById("topContent").style.transition = "1000ms"
