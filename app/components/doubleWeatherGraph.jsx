@@ -5,7 +5,7 @@ import "../components/trycss.css"
 const tooltipStyles = {
   borderRadius: "10px",
   backgroundColor: "#050505",
-  padding: "0.75rem",
+  padding: ".75rem 1.25rem",
   boxShadow: "5px 5px 10px #111",
   fontWeight: 600
 }

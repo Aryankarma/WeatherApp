@@ -738,7 +738,7 @@ export default function Home() {
         isScrolling = true;
 
         const scrollY = window.scrollY;
-        const smoothScrollFactor = 0.6;
+        const smoothScrollFactor = .7;
         const smoothScrollPosition = scrollY + (event.deltaY * smoothScrollFactor);
 
         window.scrollTo({
@@ -844,7 +844,7 @@ export default function Home() {
     </div>
 
     <div id="bottomContent" className={styles.bottomContent}>
-       
+
     <div className={styles.bottomLeftContainer}>
 
       <AqiRange range={aqiRangeValue}/>
