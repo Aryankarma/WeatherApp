@@ -762,6 +762,7 @@ export default function Home() {
 
 
     return ( <>
+
     <div onLoad={fadeInAnimation} id="addFadeIn" className={styles.homeContainer}>
 
       <div className={styles.header}>
@@ -890,7 +891,7 @@ export default function Home() {
   </div>
 
   <div className={styles.tagLine}>Made with <span style={{color: "red"}}>❤️</span> by Aryxn</div>
-
+   
   </>
 );
 }

@@ -9,7 +9,12 @@
     transition: .35s;
 }
 
- 
+/* .wrapper{
+    overflow: hidden;
+    width: 100%;
+    background-color: red;
+  }
+  */
 @keyframes opacity{
     0%{
         opacity:0;
@@ -310,8 +315,12 @@
  
 /* Small smartphones (iPhone 4, Galaxy S2, etc.) */
 @media only screen and (max-width : 475px){
+    .header{
+        margin-top: .5rem;
+    }
     .homeContainer{
-        height: 95%;
+        height: 99%;
+        overflow-x: hidden;
     }
     .searchBox{
         width: 330px;
@@ -330,7 +339,7 @@
     }
     .topContent{
         transform: scale(.85);
-        margin-top: 1rem;
+        /* margin-top: 1rem; */
         gap: 0 !important;
     }
     .bottomContent{
