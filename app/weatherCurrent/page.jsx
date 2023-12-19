@@ -407,11 +407,6 @@ export default function Home() {
     });
   }
 
-  const animationFix = () => {
-    // console.log("working")
-    document.querySelector("#searchBoxDiv").style.outline = "none"; 
-  }
-
   let weatherConditionImg = "";
 
   const lightrain = "/images/weatherCondition3d/lightrain.png"
@@ -424,13 +419,7 @@ export default function Home() {
   const windynight = "/images/weatherCondition3d/windynight.png"
 
   const setWeatherConditionPath = () => {
-
-    anime({
-      targets: '#conditionImg',
-      opacity: [0.3, 1],
-      easing: 'easeInOutQuad'
-    });
-
+    
     switch (conditionValue) {
       
       case "Patchy rain possible" :
@@ -810,10 +799,10 @@ export default function Home() {
       <div id="topContent" className={styles.topContent}>
 
       <div className={styles.mainWeather}>
-        <Image width={425} height={300} className={styles.bgImage} src="/images/bgMain.png" alt=""/>
+        <Image priority={true} quality={65} width={425} height={300} className={styles.bgImage} src="/images/bgMain.png" alt=""/>
         {/* <img className={styles.bgImage} src="images/bgMain.png" alt="" /> */}
-        {/* <Image loading="lazy" height={110} width={225} id="conditionImg" className={styles.conditionImg} src={weatherConditionImg} alt=""/> */}
-        <img loading="lazy" id="conditionImg" className={styles.conditionImg} src={weatherConditionImg} alt="" />          
+        <Image quality={50} loading="lazy" height={110} width={225} id="conditionImg" className={styles.conditionImg} src={weatherConditionImg} alt=""/>
+        {/* <img loading="lazy" id="conditionImg" className={styles.conditionImg} src={weatherConditionImg} alt="" />           */}
         {/* <img className={styles.conditionImg} src="images/weatherCondition3d/snow.png" alt="" />           */}
         
         <div id={styles.tempCondition}>
