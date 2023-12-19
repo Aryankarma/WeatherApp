@@ -7,21 +7,17 @@ import WeatherDetails from "../components/WeatherDetailSection";
 import XAxis1 from "../components/xaxis";
 import AqiRange from "../components/aqiRange"
 // import WeatherGraphContainer from "../components/WeatherGraphContainer"
-import DoubleWeatherGraph from "../components/doubleWeatherGraph"
-import SingleWeatherGraph from "../components/singleWeatherGraph"
-import { Link } from 'react-scroll';
+// import DoubleWeatherGraph from "../components/doubleWeatherGraph"
+// import SingleWeatherGraph from "../components/singleWeatherGraph"
 import Image from "next/image";
+import dynamic from 'next/dynamic';
 
-// const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
-//   ssr: false,
-// })
-// const SingleWeatherGraph = dynamic(() => import('../components/singleWeatherGraph'), {
-//   ssr: false,
-// })
-
-// const WeatherGraphContainer = dynamic(() => import('../components/WeatherGraphContainer'), {
-//   ssr: false,
-// })
+const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
+  ssr: false,
+})
+const SingleWeatherGraph = dynamic(() => import('../components/singleWeatherGraph'), {
+  ssr: false,
+})
 
 
 const singleGraphData = [
