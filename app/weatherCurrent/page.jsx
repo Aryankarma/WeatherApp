@@ -10,7 +10,7 @@ import AqiRange from "../components/aqiRange"
 import DoubleWeatherGraph from "../components/doubleWeatherGraph"
 import SingleWeatherGraph from "../components/singleWeatherGraph"
 import { Link } from 'react-scroll';
-
+import Image from "next/image";
 
 // const DoubleWeatherGraph = dynamic(() => import('../components/doubleWeatherGraph'), {
 //   ssr: false,
@@ -418,14 +418,14 @@ export default function Home() {
 
   let weatherConditionImg = "";
 
-  const lightrain = "images/weatherCondition3d/lightrain.png"
-  const cloudy = "images/weatherCondition3d/cloudy.png"
-  const snow = "images/weatherCondition3d/snow.png"
-  const sunnyfoggy = "images/weatherCondition3d/sunnyfoggy.png"
-  const thunder = "images/weatherCondition3d/thunder.png"
-  const windy = "images/weatherCondition3d/windy.png"
-  const windycloudynight = "images/weatherCondition3d/windycloudynight.png"
-  const windynight = "images/weatherCondition3d/windynight.png"
+  const lightrain = "/images/weatherCondition3d/lightrain.png"
+  const cloudy = "/images/weatherCondition3d/cloudy.png"
+  const snow = "/images/weatherCondition3d/snow.png"
+  const sunnyfoggy = "/images/weatherCondition3d/sunnyfoggy.png"
+  const thunder = "/images/weatherCondition3d/thunder.png"
+  const windy = "/images/weatherCondition3d/windy.png"
+  const windycloudynight = "/images/weatherCondition3d/windycloudynight.png"
+  const windynight = "/images/weatherCondition3d/windynight.png"
 
   const setWeatherConditionPath = () => {
 
@@ -629,9 +629,9 @@ export default function Home() {
   const [term, setTerm] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
 
-  const printThis = (e) => {
-    setTerm(e);
-  }
+  // const onChangeHandler = (e) => {
+  //   setTerm(e.target.value);
+  // }
 
   // debouncing
   useEffect(()=>{
@@ -773,7 +773,7 @@ export default function Home() {
           <div 
             tabIndex={0} onBlur={onBlurFunction}
             id="searchBoxDiv" className={styles.searchBoxDiv}>
-              <img src="images/svgs/searchLogo.svg" alt="" />
+              <Image src="images/svgs/searchLogo.svg" alt="" height={20} width={20} />
               <input
                 id="removeFocus"
                 className={styles.searchBox}
@@ -781,8 +781,10 @@ export default function Home() {
                 placeholder="Enter city"
                 name="city"
                 onFocus={onFocusFunction}
-                autocomplete="off"
-                onChange={(e) => printThis(e.target.value)}
+                autoComplete="off"
+                onChange={(e) => {
+                  setTerm(e.target.value);
+                }}
               />
             
             <ul className={styles.belowInput} >
@@ -812,7 +814,9 @@ export default function Home() {
       <div id="topContent" className={styles.topContent}>
 
       <div className={styles.mainWeather}>
-        <img className={styles.bgImage} src="images/bgMain.png" alt="" />
+        <Image width={425} height={300} className={styles.bgImage} src="/images/bgMain.png" alt=""/>
+        {/* <img className={styles.bgImage} src="images/bgMain.png" alt="" /> */}
+        {/* <Image loading="lazy" height={110} width={225} id="conditionImg" className={styles.conditionImg} src={weatherConditionImg} alt=""/> */}
         <img loading="lazy" id="conditionImg" className={styles.conditionImg} src={weatherConditionImg} alt="" />          
         {/* <img className={styles.conditionImg} src="images/weatherCondition3d/snow.png" alt="" />           */}
         
@@ -825,7 +829,8 @@ export default function Home() {
         </div>  
       
         <div id={styles.location1}>
-          <img className={styles.svgLocation} src="images/svgs/locationLogo.svg" alt="" />
+          <Image height={35} width={35} className={styles.svgLocation} src="/images/svgs/locationLogo.svg" alt=""/>
+          {/* <img className={styles.svgLocation} src="images/svgs/locationLogo.svg" alt="" /> */}
           <h1>{locationValue}</h1>
         </div>
       </div>
@@ -856,13 +861,15 @@ export default function Home() {
          <div className={styles.item}></div>
         </div>
 
-        <img loading="lazy" className={styles.img} src="images/Ellipsefinal.png" alt="sunLine" />
+        <Image height={70} width={400} loading="lazy" className={styles.img} src="/images/Ellipsefinal.png" alt="sunLine" />
+        {/* <img loading="lazy" className={styles.img} src="images/Ellipsefinal.png" alt="sunLine" /> */}
         
         <div className={styles.blackShade}>
           <div className={styles.timings}>
             <div className={styles.sunset}>
               <div className={styles.upper}>
-                <img className={styles.svg} src="images/svgs/sunrise-2.svg" alt="" />
+                <Image height={25} width={25} className={styles.svg} src="/images/svgs/sunrise-2.svg" alt=""  />
+                {/* <img className={styles.svg} src="images/svgs/sunrise-2.svg" alt="" /> */}
                 <p>Sunrise</p>
               </div>
                 <hr style={{border:0}} />
@@ -870,7 +877,8 @@ export default function Home() {
             </div>
             <div className={styles.sunset}>
             <div className={styles.upper}>
-                <img className={styles.svg} src="images/svgs/sunset-2.svg" alt="" />
+                <Image height={25} width={25} className={styles.svg} src="/images/svgs/sunset-2.svg" alt=""  />
+                {/* <img className={styles.svg} src="images/svgs/sunset-2.svg" alt="" /> */}
                 <p>Sunset</p>
             </div>
                 <hr style={{border:0}}/>
@@ -882,8 +890,8 @@ export default function Home() {
 </div>
 
       <div className={styles.weatherDetailContainer}>
-        {weatherDetailData.map((input)=>{
-          return <WeatherDetails value={input.value} sub={input.sub} heading={input.heading} logo={input.logo}/>
+        {weatherDetailData.map((input, index)=>{
+          return <WeatherDetails key={index} value={input.value} sub={input.sub} heading={input.heading} logo={input.logo}/>
         })}
       </div>
 

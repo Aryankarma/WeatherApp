@@ -1,4 +1,5 @@
 import { memo } from "react";
+import Image from "next/image";
 import styles from "../components/aqirange.module.css"
 
 const AqiRange = ({range}) => {
@@ -42,7 +43,8 @@ const AqiRange = ({range}) => {
 
     return <div className={styles.aqiContainer}>
         <div className={styles.headContainer}>
-            <img src="images/svgs/airQualityLogo.svg" alt="" /><h1 id="heading" className={styles.aqiHeading}>Air Quality - {range} ({airHealth}) </h1>
+            <Image src="images/svgs/airQualityLogo.svg" alt="" width={32.5} height={28.5} />
+            <h1 id="heading" className={styles.aqiHeading}>Air Quality - {range} ({airHealth}) </h1>
         </div>
         <input
             max={500}
