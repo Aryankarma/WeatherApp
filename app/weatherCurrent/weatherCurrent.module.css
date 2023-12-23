@@ -295,7 +295,8 @@
 }
 
 .belowInput li{
-    padding: 7.5px 15px;
+    /* fixed in button */
+    /* padding: 7.5px 15px; */
     background-color: #151515;
     margin: 0;
     border: 0;

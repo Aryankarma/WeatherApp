@@ -751,7 +751,6 @@ export default function Home() {
     <div onLoad={fadeInAnimation} id="addFadeIn" className={styles.homeContainer}>
 
       <div className={styles.header}>
-
         {/* <Greeting hour={hour}/> */}
 
         <form action="" id="runOnsubmit" onSubmit={(e) => formSubmit(e)}>
@@ -778,7 +777,7 @@ export default function Home() {
 
               {cityName.map((suggestion, index) => (
                 <li key={index} >
-                  <button type="submit" > {suggestion} </button>
+                  <button style={{width: "100%", padding: "7.5px 15px",textAlign: "left"}} type="submit" > {suggestion} </button>
                 </li>
               ))}
            

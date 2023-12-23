@@ -24,6 +24,8 @@ const AqiRange = ({range}) => {
         airHealth = "Dangerous"
     }else if(range < 500){
         airHealth = "Hazardous"
+    }else{
+        airHealth = "Hazardous"    
     }
 
     // setting statement
@@ -38,6 +40,8 @@ const AqiRange = ({range}) => {
     }else if(range < 300){
         statement = "Very Unhealthy: Stay Indoors."
     }else if(range < 500){
+        statement = "Hazardous: Protect Your Health, Stay In."
+    }else{
         statement = "Hazardous: Protect Your Health, Stay In."
     }
 
