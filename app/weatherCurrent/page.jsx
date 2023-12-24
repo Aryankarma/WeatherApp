@@ -178,6 +178,7 @@ export default function Home() {
     e.preventDefault();
     const rawData = new FormData(e.currentTarget);
     const dataInput = rawData.get("city");
+    console.log(dataInput)
     fetchWeather(api, dataInput);
   };
 
