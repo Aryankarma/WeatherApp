@@ -1,3 +1,4 @@
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Head from 'next/head';
@@ -16,7 +17,10 @@ export default function RootLayout({ children }) {
         <link type="image/png" sizes="16x16" rel="icon" href="/icons8-weather-16.png"/>
       </Head>
       {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> */}
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+          <SpeedInsights/>
+          {children}
+        </body>
     </html>
   )
 }
