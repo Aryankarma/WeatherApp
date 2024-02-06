@@ -641,28 +641,32 @@ export default function Home() {
   useEffect(()=>{
 
     const fetchCityData = async () =>{
-      const cityURL = "https://api.teleport.org/api/cities/?search=" + term;
-
+      const cityURLold = "https://api.teleport.org/api/cities/?search=" + term;
+      // const cityURL = "https://secure.geonames.org/searchJSON?name="+ term +"&name_startsWith=" + term + "&maxRows=5&featureCode=PPL&cities=cities1000&fuzzy=0&username=aryankarma" ;
+      const cityURL = "https://secure.geonames.org/searchJSON?name="+ term +"&name_startsWith=" + term + "&maxRows=5&cities=cities1000&fuzzy=0&orderby=population&username=aryankarma" ;
+      
       try{
         const rawData = await fetch(cityURL);
         const citydata = await rawData.json();
         
         // console.log("Fetching data")
+        // console.log(citydata.geonames[0].name);
 
         let count = 0;
         const tempCityName = [];
       
       for (let i = 0; i < 5; i++) {
-        if (citydata?._embedded["city:search-results"][i]?.matching_full_name) {
+        if (citydata?.geonames[i]?.name) {
           count++;
         }
       }
-        for (let i = 0; i < count; i++) {
-        tempCityName.push(citydata?._embedded["city:search-results"][i]?.matching_full_name);
+      
+      for (let i = 0; i < count; i++) {
+        tempCityName.push(citydata?.geonames[i]?.name);
       }
         setCityName(tempCityName);
       }catch(error){
-      console.log(error);
+        console.log(error);
     }
   } 
 
